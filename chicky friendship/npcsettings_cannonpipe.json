@@ -1,0 +1,62 @@
+{
+	"style" : "groupbox",
+	"title" : "Cannon Pipe Settings",
+	"layout": [
+		{
+			"control": "spinBox",
+			"name": "length",
+			"title": "Length",
+			"type": "int",
+			"tooltip": "How tall the NPC is.",
+			"value-default": 2,
+			"value-min": 1,
+			"value-max": 999
+		},
+		{
+			"control": "spinBox",
+			"name": "shootLengthChange",
+			"title": "Shoot Length Change",
+			"type": "int",
+			"tooltip": "How much the length changes when the pipe is aimed.",
+			"value-default": 1,
+			"value-min": -999,
+			"value-max": 999
+		},
+		{
+			"control": "spinBox",
+			"name": "shootRotation",
+			"title": "Shoot Rotation",
+			"type": "int",
+			"tooltip": "The angle (in degrees, clockwise) that the player is shot out at.",
+			"value-default": 0,
+			"value-min": -360,
+			"value-max": 360,
+			"single-step": 5
+		},
+		{
+			"control": "spinBox",
+			"name": "force",
+			"title": "Force",
+			"type": "double",
+			"tooltip": "The amount of speed the player gets from being shot out (in pixels per frame).",
+			"value-default": 24,
+			"value-min": 0,
+			"value-max": 64
+		},
+		{
+			"control": "checkBox",
+			"name": "noMounts",
+			"title": "No Mounts",
+			"tooltip": "Whether or not boots and yoshies are allowed into the pipe.",
+			"value-default": false
+		},
+		{
+			"control": "checkBox",
+			"name": "noHeldNPCs",
+			"title": "No Items",
+			"tooltip": "Whether or not NPC's held by the player are allowed into the pipe.",
+			"value-default": false
+		}
+	]
+}
+
