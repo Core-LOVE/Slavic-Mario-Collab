@@ -115,8 +115,8 @@ local font =  textplus.loadFont("textplus/font/6.ini")
 local path = mem(0x00B2C61C, FIELD_STRING) .. "/"
 local clover = Graphics.loadImage(path .. 'devkit/clover.png')
 
-local x = 800 - 200
-local y = 600 - 48
+local x = (800 - 200) + 16
+local y = 600 - 42
 
 local t = 0
 

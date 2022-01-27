@@ -50,14 +50,8 @@ function npc.onNPCKill(e, v, r)
 	
 	if not p then return end
 	
-	for k in ipairs(Section.get()) do
-		Audio.MusicChange(k - 1, 0)
-	end
-	
-	SFX.play("devkit/win.ogg")
+	SFX.play(59)
 
-	Level.finish(LEVEL_END_STATE_STAR, true)
-	
 	if not(SaveData[Level.filename()] and SaveData[Level.filename()].__clovers and SaveData[Level.filename()].__clovers[v.idx]) then
 		SaveData[Level.filename()] = SaveData[Level.filename()] or {}
 		SaveData[Level.filename()].__clovers = SaveData[Level.filename()].__clovers or {}
@@ -79,7 +73,7 @@ function npc.onCameraDrawNPC(v)
 	local gfxwidth = cfg.gfxwidth
 	
 	local time = lunatime.tick() / 16
-	local rot = math.cos(time) * 16
+	local rot = -math.cos(time) * 16
 	
 	local c = 1
 	
@@ -90,7 +84,7 @@ function npc.onCameraDrawNPC(v)
 	if c == 1 then
 		local x = (v.width - img2.width) / 2
 		local y = (v.height - img2.height) * 1.5
-		local scale = math.sin(time) * 2
+		local scale = -math.sin(time) * 2
 		
 		-- Graphics.drawImageToSceneWP(img2, v.x + x, v.y + y, -15)
 		
