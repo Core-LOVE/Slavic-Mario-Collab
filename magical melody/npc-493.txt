@@ -1,0 +1,9 @@
+width=16
+height=16
+gfxwidth=16
+gfxheight=16
+frames=1
+framestyle=0
+grid=16
+lightcolor = pink
+lightradius = 32

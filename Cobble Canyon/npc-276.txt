@@ -1,0 +1,4 @@
+gfxwidth=30
+gfxheight=30
+width=30
+height=30
