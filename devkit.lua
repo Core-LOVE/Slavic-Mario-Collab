@@ -40,6 +40,8 @@ ld.registerStyle("rmc",{
 })
 ld.defaultStyleName = "rmc"
 
+_G.littleDialogue = ld
+
 require(path .. "pause")
 
 local files = Misc.listFiles(Misc.episodePath() .. 'lang')

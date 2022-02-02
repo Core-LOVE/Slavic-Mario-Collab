@@ -1,0 +1,2 @@
+idleFrames=1
+variations=2
