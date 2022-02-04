@@ -16,6 +16,7 @@ local names = {
 		'Продолжить',
 		'Рестарт',
 		'Язык',
+		'Оптимизация',
 		'Выйти',
 	},
 	
@@ -23,6 +24,7 @@ local names = {
 		'Continue',
 		'Restart',
 		'Language',
+		'Optimiz.',
 		'Exit',
 	},
 }
@@ -40,6 +42,35 @@ local function restart()
 	Level.load()
 end
 
+SaveData.optimized = SaveData.optimized or false
+
+local initDark = {}
+local initWeather = {}
+
+local function optimize()
+	for k,v in ipairs(Section.get()) do
+		-- darkness
+		local dark = v.darkness
+		
+		if dark.enabled ~= nil and initDark[v.idx] == nil then
+			dark.enabled = not dark.enabled
+		end
+		
+		-- effects
+		local effects = v.effects
+		local weather = effects.weather
+		
+		if initWeather[v.idx] == nil and weather ~= 0 then
+			initWeather[v.idx] = weather
+			
+			effects.weather = 0
+		else
+			effects.weather = initWeather[v.idx]
+			initWeather[v.idx] = nil
+		end
+	end
+end
+
 local options = {
 	{name = "Continue", action = function()
 		alpha = 0
@@ -51,6 +82,16 @@ local options = {
 	{name = "Restart", action = restart},
 	
 	{name = "Language", drawIcon = true},
+	
+	{name = "Optimize", check = function() return SaveData.optimized end, action = function()
+		optimize()
+		
+		SaveData.optimized = not SaveData.optimized
+		
+		if onOptimize then
+			onOptimize(SaveData.optimized)
+		end
+	end},
 	
 	{name = "Exit", action = function()
 		if Misc.inEditor() then
@@ -99,6 +140,8 @@ end
 local textplus = require 'textplus'
 local font =  textplus.loadFont("devkit/font.ini")
 
+local check = Graphics.loadImageResolved("devkit/check.png")
+
 function pause.onDraw()
 	if myPauseActive and not Misc.isPausedByLua() then
 		-- If other code unpaused us, well, clear our pause state I guess
@@ -131,8 +174,8 @@ function pause.onDraw()
 	
 	
 	for k,v in ipairs(options) do	
-		local dy = 32 * k
-		dy = dy - 16
+		local dy = 24 * k
+		dy = dy - 8
 		
 		textplus.print{
 			text = v.name, 
@@ -147,6 +190,20 @@ function pause.onDraw()
 		
 		if v.drawIcon then
 			Graphics.drawBox{texture = langs[lang + 1], x = (x + w) - 48, y = y + dy, priority = 5}
+		end
+		
+		if v.check then
+			local result = v.check()
+			
+			local sourceY = 0
+			local h = check.height * 0.5
+			
+			if result then
+				sourceY = h
+			end
+			
+			Graphics.drawBox{texture = check, x = (x + w) - 48, y = y + dy, priority = 5,
+			sourceY = sourceY, sourceHeight = h}
 		end
 		
 		if option + 1 == k then
@@ -194,10 +251,29 @@ function pause.onInputUpdate()
 	end
 end
 
+function pause.onStart()
+	for k,v in ipairs(Section.get()) do
+		local dark = v.darkness
+		
+		if dark.enabled ~= nil and dark.enabled == false then
+			initDark[v.idx] = true
+		end
+	end
+	
+	if not SaveData.optimized then return end
+	
+	optimize()
+	
+	if onOptimize then
+		onOptimize(SaveData.optimized)
+	end
+end
+
 function pause.onInitAPI()
 	registerEvent(pause, 'onInputUpdate')
 	registerEvent(pause, 'onDraw')
 	registerEvent(pause, 'onPause')
+	registerEvent(pause, 'onStart')
 end
 
 return pause

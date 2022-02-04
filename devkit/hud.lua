@@ -5,6 +5,8 @@ local hud2 = Graphics.loadImageResolved "devkit/hud2.png"
 local hud3 = Graphics.loadImageResolved "devkit/hud3.png"
 
 local itembox = Graphics.loadImageResolved "devkit/itembox.png"
+local heart = Graphics.loadImageResolved 'devkit/heart.png'
+
 local clover = Graphics.loadImageResolved "devkit/clover.png"
 
 local textplus = require 'textplus'
@@ -91,14 +93,54 @@ local function renderClovers(priority)
 	}
 end
 
+local function renderHearts(priority)
+	local count = player.Hearts
+	
+	local x = (400 - 26)
+	local y = 48
+	
+	local dx = -24
+	
+	for i = 1, 3 do
+		local c
+		
+		if count < i then
+			c = {0.5, 0.5, 0.5, 0.5}
+		end
+		
+		Graphics.drawBox{
+			texture = heart,
+			
+			x = x + dx,
+			y = y,
+			
+			color = c or {1, 1, 1, 1},
+			priority = priority
+		}
+		
+		dx = dx + heart.width + 2
+	end
+end
+
 local oldCoinCount = mem(0x00B2C5A8, FIELD_WORD)
+
+local noItembox = {
+	[3] = true,
+	[4] = true,
+	[5] = true,
+}
 
 Graphics.overrideHUD(function(idx, priority, isSplit)
 	local c = Camera(idx)
 	
 	renderCoins(priority)
 	renderScore(priority)
-	renderItembox(idx, priority)
+	
+	if not noItembox[player.character] then
+		renderItembox(idx, priority)
+	else
+		renderHearts(priority)
+	end
 	-- renderStars(priority)
 	renderClovers(priority)
 	

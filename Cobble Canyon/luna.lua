@@ -150,3 +150,12 @@ function onCameraDraw()
 		sceneCoords = true,
 	}
 end
+
+function onOptimize()
+	for k,v in ipairs(Section.get()) do
+		if v.backgroundID == 11 then
+			local layer = v.background:get("bg3")
+			layer.hidden = not layer.hidden
+		end
+	end
+end

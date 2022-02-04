@@ -1,0 +1,6 @@
+[first]
+import=AI_SINGLE
+frames=3
+framespeed=8
+priority=4.7
+gravity=0.3

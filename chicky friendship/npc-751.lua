@@ -96,9 +96,10 @@ function npc.onTickEndNPC(v)
 		
 		if p.keys.jump == KEYS_PRESSED then
 			p.speedY = -1
-			p.speedX = p.speedX * 1.01
 			
 			Effect.spawn(751, v.x, v.y)
+		elseif p.keys.jump == KEYS_DOWN then
+			p.speedY = math.clamp(p.speedY, -12, 1)
 		end
 	end
 end

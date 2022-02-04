@@ -4,6 +4,9 @@ local id = NPC_ID
 
 local npcManager = require 'npcManager'
 
+local animation = -1
+local clover = {x = 0, y = 0, speedY = 0}
+
 npcManager.setNpcSettings{
 	id = id,
 	
@@ -48,7 +51,7 @@ function npc.onNPCKill(e, v, r)
 	
 	local p = npcManager.collected(v, r)
 	
-	if not p then return end
+	if not p or p.forcedState ~= 0 then return end
 	
 	for k in ipairs(Section.get()) do
 		Audio.MusicChange(k - 1, 0)
@@ -65,6 +68,15 @@ function npc.onNPCKill(e, v, r)
 		
 		SaveData.cloversCount = SaveData.cloversCount or 0
 		SaveData.cloversCount = SaveData.cloversCount + 1
+	end
+	
+	p.forcedState = 8
+
+	if animation == -1 then
+		animation = 0
+		Defines.earthquake = 4
+		clover.x = p.x
+		clover.y = p.y	
 	end
 end
 
@@ -131,7 +143,79 @@ function npc.onCameraDrawNPC(v)
 	end
 end
 
+local img = Graphics.loadImageResolved 'devkit/mario.png'
+local cloverImg = Graphics.loadImageResolved 'devkit/clover.png'
+
+function npc.onCameraDraw()
+	if animation < 0 then return end
+	
+	local x = clover.x + 8
+	local y = clover.y + 8
+		
+	animation = animation + 1
+	
+	-- animation
+	Graphics.drawScreen{
+		color = Color.black .. 0.5,
+		priority = 4,
+	}
+	
+	local f = 0
+	
+	if animation == 24 then
+		Defines.earthquake = 8
+		
+		for i = 1, 8 do
+			local e = Effect.spawn(1000, x, y)
+			e.speedY = -math.random(8)
+			e.speedX = math.random(-4, 4)
+		end
+	end
+	
+	if animation > 24 then
+		f = 1
+	end
+	
+	local h = (img.height * 0.5)
+	
+	Graphics.drawBox{
+		texture = img,
+		
+		x = player.x,
+		y = player.y,
+		
+		sourceY = h * f,
+		sourceHeight = h,
+		
+		sceneCoords = true,
+		priority = 4.5,
+	}
+	
+	-- clover
+	if animation < 25 then return end
+	
+	clover.speedY = clover.speedY - 0.25
+	clover.y = clover.y + clover.speedY
+	
+	if math.random() > 0.75 then
+		local e = Effect.spawn(1000, x, y)
+		e.speedX = math.random(-1,1)
+		e.speedY = math.random()
+	end
+	
+	Graphics.drawBox{
+		texture = cloverImg,
+		
+		x = x,
+		y = y,
+		
+		sceneCoords = true,
+		priority = 4.6,
+	}
+end
+
 function npc.onInitAPI()
+	registerEvent(npc, 'onCameraDraw')
 	npcManager.registerEvent(id, npc, 'onCameraDrawNPC')
 	npcManager.registerEvent(id, npc, 'onTickEndNPC')	
 	registerEvent(npc, 'onNPCKill')
