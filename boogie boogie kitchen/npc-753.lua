@@ -1,5 +1,7 @@
 local boss = {}
 
+local hud = require 'devkit/hud'
+
 local npcManager = require 'npcManager'
 local id = NPC_ID
 
@@ -58,9 +60,17 @@ phases.onAnimation = function(v)
 	v.animationFrame = -1
 end
 
+local icon = Graphics.loadImageResolved 'bossIcon.png'
+
 phases.onCameraDraw = function(v)
 	local data = v.data
 	local cfg = NPC.config[id]
+	
+	if data.hp <= 0 then
+		data.frame = -1
+	end
+	
+	if data.frame and data.frame < 0 then return end
 	
 	local rot = 0
 	
@@ -113,6 +123,12 @@ phases.onCameraDraw = function(v)
 		priority = -40,
 		
 		color = Color.white .. col,
+	}
+	
+	hud.showBossHP{
+		icon = icon,
+		amount = data.hp,
+		max = 6,
 	}
 end
 
@@ -173,6 +189,33 @@ local function condition(phase, v)
 	return (data.phaseTimer > (phase.maxTimer or 180))
 end
 
+local function death(v)
+	local x,y = v.x, v.y
+	
+	Audio.SeizeStream(player.section)
+	Audio.MusicStop()
+	local n = NPC.spawn(489, v.x, v.y)
+	v.animationFrame = -1
+	
+	Misc.pause()
+	Routine.wait(1.5, true)
+	Misc.unpause()
+	
+	if player.deathTimer > 0 then return end
+	
+	Text.showMessageBox("<portrait boogie>Uh-oh!!<page>Welp, nothing can stop you, huh?")
+
+	Routine.waitFrames(2)
+	n:kill(9)
+	local e = Effect.spawn(751, x, y)
+	e.speedX = 6
+	e.speedY = -12
+	
+	Routine.wait(2)
+	local l = Layer.get("door")
+	l:toggle(false)
+end
+
 function boss.onNPCHarm(e, v, r, o)
 	if v.id ~= id then return end
 	
@@ -191,8 +234,12 @@ function boss.onNPCHarm(e, v, r, o)
 		data.immune = 60
 		
 		e.cancelled = true
-	else
+	end
 	
+	if data.hp <= 0 then
+		e.cancelled = false
+		data.frame = -1
+		Routine.run(death, v)
 	end
 end
 
@@ -222,6 +269,12 @@ function boss.onTickNPC(v)
 	if not phase then return end
 	
 	call(phase, 'onTick', v)
+	
+	-- player death
+	if player.deathTimer == 1 then
+		Audio.SeizeStream(player.section)
+		Audio.MusicStop()
+	end
 end
 
 function boss.onTickEndNPC(v)

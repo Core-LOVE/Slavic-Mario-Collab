@@ -39,6 +39,7 @@ ld.registerStyle("rmc",{
 ld.defaultStyleName = "rmc"
 
 _G.littleDialogue = ld
+_G.cutscene = require(path .. "cutscene")
 
 require(path .. "pause")
 

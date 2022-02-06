@@ -124,12 +124,53 @@ local function renderHearts(priority)
 	end
 end
 
+local function rect(x, y, w, h, c, p)
+	Graphics.drawBox{
+		x = x, y = y, width = w, height = h, color = c, priority = p,
+	}
+end
+
 local function renderBossHP(priority)
-	local x = 800
-	local y = 600
+	local x = 800 - 128
+	local y = 600 - 48
+	
+	local dy = 0
 	
 	for k,v in ipairs(bosses) do
+		local amount = v.amount
+		local percent = math.floor((amount / v.max) * 100)
+		
+		local y = (y + dy)
+		
+		rect(x - 8, y - 8, 116, 48, Color.black .. 0.5, priority)
+		
+		if v.icon then
+			Graphics.drawBox{
+				texture = v.icon,
+				
+				x = x - v.icon.width,
+				y = y,
+				
+				priority = priority,
+			}
+		end
+		
+		textplus.print{
+			text = ("HP:" .. percent .. '%'),
+			
+			x = x,
+			y = y,
+			
+			font = font,
+			xscale = 2,
+			yscale = 2,
+			priority = priority,
+		}
+		
+		rect(x + 2, y + 18, 100, 8, Color.black, priority)
+		rect(x, y + 16, percent, 8, Color.red, priority)
 
+		dy = dy - 64
 	end
 	
 	bosses = {}
@@ -198,8 +239,8 @@ Graphics.overrideHUD(function(idx, priority, isSplit)
 	end
 end)
 
-function hud.showBossHP(amount, max)
-	bosses[#bosses + 1] = {val = amount, max = max}
+function hud.showBossHP(args)
+	bosses[#bosses + 1] = args
 end
 
 return hud

@@ -1,1 +1,2 @@
 nogravity=true
+frames=4
