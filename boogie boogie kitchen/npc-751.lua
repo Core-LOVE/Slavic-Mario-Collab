@@ -1,22 +1,38 @@
-local bossAPI = require 'devkit/bosser'
+--[[
 
-local id = NPC_ID
-local boss = {}
+	Written by MrDoubleA
+	Please give credit!
 
-boss.config = {
-	id = id,
-	frames =1,
-	jumphurt = false,
-	nohurt = false,
-}
+    Part of MrDoubleA's NPC Pack
 
-boss.phases = {}
+]]
 
-boss.phases[1] = {(function(v, t)
-	if t == 32 then
-		v.speedY = -9
-	end
-end), maxTimer = 180}
+local npcManager = require("npcManager")
 
-boss = bossAPI.new(boss)
-return boss
+local ai = require("yiDoor_ai")
+
+
+local yiDoor = {}
+local npcID = NPC_ID
+
+local yiDoorSettings = table.join({
+	id = npcID,
+	
+	gfxwidth = 64,
+	gfxheight = 64,
+
+	gfxoffsetx = 0,
+	gfxoffsety = 0,
+	
+	width = 64,
+	height = 64,
+},ai.sharedSettings)
+
+npcManager.setNpcSettings(yiDoorSettings)
+npcManager.registerHarmTypes(npcID,{},{})
+
+
+ai.register(npcID)
+
+
+return yiDoor

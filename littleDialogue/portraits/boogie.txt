@@ -1,0 +1,4 @@
+idleFrames=1
+variations=1
+voice="boogieboogie"
+speakerName="Boogie Boogie"

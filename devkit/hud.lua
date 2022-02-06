@@ -1,5 +1,7 @@
 local hud = {}
 
+local bosses = {}
+
 local hud1 = Graphics.loadImageResolved "devkit/hud1.png"
 local hud2 = Graphics.loadImageResolved "devkit/hud2.png"
 local hud3 = Graphics.loadImageResolved "devkit/hud3.png"
@@ -122,6 +124,17 @@ local function renderHearts(priority)
 	end
 end
 
+local function renderBossHP(priority)
+	local x = 800
+	local y = 600
+	
+	for k,v in ipairs(bosses) do
+
+	end
+	
+	bosses = {}
+end
+
 local oldCoinCount = mem(0x00B2C5A8, FIELD_WORD)
 
 local noItembox = {
@@ -135,6 +148,7 @@ Graphics.overrideHUD(function(idx, priority, isSplit)
 	
 	renderCoins(priority)
 	renderScore(priority)
+	renderBossHP(priority)
 	
 	if not noItembox[player.character] then
 		renderItembox(idx, priority)
@@ -183,5 +197,9 @@ Graphics.overrideHUD(function(idx, priority, isSplit)
 		end	
 	end
 end)
+
+function hud.showBossHP(amount, max)
+	bosses[#bosses + 1] = {val = amount, max = max}
+end
 
 return hud

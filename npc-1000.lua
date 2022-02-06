@@ -71,7 +71,7 @@ function npc.onNPCKill(e, v, r)
 	end
 	
 	p.forcedState = 8
-
+	
 	if animation == -1 then
 		animation = 0
 		Defines.earthquake = 4

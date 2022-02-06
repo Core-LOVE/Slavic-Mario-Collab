@@ -1,0 +1,14 @@
+{
+	"style" : "groupbox",
+	"title" : "Goal Tape Settings",
+	"layout": [
+		{
+			"control": "combobox",
+			"name": "exitStyle",
+			"title": "Exit Door Style",
+			"tooltip": "How exactly the exit door closes.",
+			"elements": ["Do Nothing","Close After","Open Simultaneously"],
+			"value-default": 0
+		}
+	]
+}

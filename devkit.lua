@@ -35,8 +35,6 @@ ld.registerStyle("rmc",{
     forcedPosVerticalPivot = 0,
 	
 	minBoxMainHeight = 104,
-	useMaxWidthAsBoxWidth = true,
-    textMaxWidth = 300,
 })
 ld.defaultStyleName = "rmc"
 
