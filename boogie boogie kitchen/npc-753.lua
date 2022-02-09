@@ -164,13 +164,6 @@ phases[2].onTick = function(v)
 			n.speedY = math.sin(angle) * 4
 		end
 	end
-	
-	if v.collidesBlockTop then
-		Defines.earthquake = 10
-		v.speedX = 8 * v.direction
-		v.speedY = 12
-		SFX.play('bossBounce.ogg')	
-	end
 end
 
 local function call(phase, name, ...)
@@ -221,6 +214,12 @@ function boss.onNPCHarm(e, v, r, o)
 	
 	local data = v.data
 	
+	local dmg = 1
+	
+	if o and o.id == 13 then
+		dmg = 0.25
+	end
+	
 	if data.immune > 0 then
 		e.cancelled = true
 		return
@@ -230,7 +229,7 @@ function boss.onNPCHarm(e, v, r, o)
 	Defines.earthquake = 6
 	
 	if data.hp > 0 then
-		data.hp = (data.hp - 1)
+		data.hp = (data.hp - dmg)
 		data.immune = 60
 		
 		e.cancelled = true

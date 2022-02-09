@@ -1,0 +1,4 @@
+idleFrames=1
+variations=1
+voice="sherif"
+speakerName="Sherif Bun"

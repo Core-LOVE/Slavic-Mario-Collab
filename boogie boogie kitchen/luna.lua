@@ -29,7 +29,8 @@ local function bossMeet()
 	for k,v in NPC.iterate(404) do
 		v:kill(9)
 		
-		NPC.spawn(753, v.x, v.y)
+		local n = NPC.spawn(753, v.x, v.y)
+		n.direction = -1
 	end
 end
 

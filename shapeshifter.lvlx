@@ -2,7 +2,7 @@ HEAD
 TL:"Green Field";CPID:"SMBX2";
 HEAD_END
 SECTION
-SC:0;L:-200000;R:-184256;T:-200600;B:-200000;MZ:24;MF:"green field/yky.ogg";BG:10;XTRA:"{\n    \"darkness\"\: {\n        \"ambient\"\: \"#ffffffff\"\,\n        \"enableDarkness\"\: false\,\n        \"playerlight\"\: {\n            \"brightness\"\: 2\n        }\n    }\,\n    \"effects\"\: {\n        \"screenEffects\"\: 0\,\n        \"weather\"\: 0\n    }\n}\n";
+SC:0;L:-200000;R:-184256;T:-200600;B:-200000;MZ:24;MF:"shapeshifter/yky.ogg";BG:10;XTRA:"{\n    \"darkness\"\: {\n        \"ambient\"\: \"#ffffffff\"\,\n        \"enableDarkness\"\: false\,\n        \"playerlight\"\: {\n            \"brightness\"\: 2\n        }\n    }\,\n    \"effects\"\: {\n        \"screenEffects\"\: 0\,\n        \"weather\"\: 0\n    }\n}\n";
 SC:1;L:-180000;R:-179200;T:-180600;B:-180000;MZ:0;MF:"";BG:0;
 SECTION_END
 STARTPOINT
