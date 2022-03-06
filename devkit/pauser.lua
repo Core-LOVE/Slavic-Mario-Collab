@@ -1,5 +1,9 @@
+local pauseDebug = true
+
 local pause = {}
 pause.disabled = false
+
+SaveData.disableShake = SaveData.disableShake or false
 
 SaveData.optimizeWeather = SaveData.optimizeWeather or false
 SaveData.optimizeOther = SaveData.optimizeOther or false
@@ -7,6 +11,12 @@ SaveData.optimizeDarkness = SaveData.optimizeDarkness or false
 
 local initDark = {}
 local initWeather = {}
+
+function pause.onTick()
+	if Defines.earthquake ~= 0 then
+		Defines.earthquake = 0
+	end	
+end
 
 function pause.onStart()
 	for k,v in ipairs(Section.get()) do
@@ -53,6 +63,8 @@ function pause.onPause(eventObj)
 		eventObj.cancelled = true
 
 		if not pause.disabled then
+			Audio.MusicVolume(8)
+			
 			-- Set your own pause state
 			myPauseActive = true
 			
@@ -63,8 +75,6 @@ function pause.onPause(eventObj)
 		end
 	end
 end
-
-local pauseDebug = true
 
 local options = {}
 
@@ -121,6 +131,28 @@ local settings = {
 				x = x,
 				y = y - 6,
 			}
+		end,
+	},
+	
+	{
+		name = 'Disable Screenshake',
+		icon = function(x, y)
+			local state = (SaveData.disableShake and 1) or 0
+			local h = check.height * 0.5
+			
+			Graphics.drawBox{
+				texture = check,
+				
+				x = x,
+				y = y - 6,
+				
+				sourceY = h * state,
+				sourceHeight = h,
+			}
+		end,
+		
+		action = function()
+			SaveData.disableShake = not SaveData.disableShake
 		end,
 	},
 	
@@ -224,6 +256,7 @@ options[1] = {
 	name = 'Continue',
 	
 	action = function()
+		Audio.MusicVolume(64)
 		Misc.unpause()
 	end,
 }
@@ -288,11 +321,13 @@ translation['rus'] = {
 }
 
 function pause.onInputUpdate()
-	-- if pauseDebug and Misc.GetKeyState(0x43) and not Misc.isPaused() then
-		-- Misc.openPauseMenu()
-	-- end
+	if pauseDebug and Misc.GetKeyState(0x43) and not Misc.isPaused() then
+		Misc.openPauseMenu()
+	end
 	
 	if myPauseActive and not Misc.isPausedByLua() then
+		Audio.MusicVolume(64)
+		
 		-- If other code unpaused us, well, clear our pause state I guess
 		myPauseActive = false
 	end
@@ -301,7 +336,22 @@ function pause.onInputUpdate()
 	if myPauseActive then
 		local rk = player.rawKeys
 		
+		if (rk.run == KEYS_PRESSED) then
+			local parent = options.parent
+			SFX.play 'devkit/click.ogg'
+			
+			if parent then
+				options = parent
+				options.parent = nil
+			else
+				Audio.MusicVolume(64)
+				Misc.unpause()
+				return
+			end
+		end
+		
 		if (rk.pause == KEYS_PRESSED) then
+			Audio.MusicVolume(64)
 			Misc.unpause()
 			return
 		end
@@ -447,6 +497,7 @@ function pause.onDraw()
 end
 
 function pause.onInitAPI()
+	registerEvent(pause, 'onTick')
 	registerEvent(pause, 'onInputUpdate')
 	registerEvent(pause, 'onDraw')
 	registerEvent(pause, 'onPause')

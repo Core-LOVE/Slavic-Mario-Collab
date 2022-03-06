@@ -128,15 +128,34 @@ local loadImg
 local loadAlpha = 1
 
 local names = {
-	['el norado'] = 'El Norado',
 	['prologue'] = 'Prologue',
-	['chicky friendship'] = 'Chicky Friendship'
+	['Deciduous forest'] = 'Deciduous Forest',
+	['chicky friendship'] = 'Chicky Friendship',
+	['shapeshifter'] = 'Shapeshifter',
+	['boogie boogie kitchen'] = "Boogie Boogie's Kitchen",
+	
+	['Celestial islands'] = "Celestial Islands",
+	['majestic melody'] = 'Majestic Melody',
+	['sherif bun fortress'] = "Sherif Bun's Fortress",
+	
+	['el norado'] = 'El Norado',
 }
 
 local authors = {
-	['el norado'] = 'Core',
 	['prologue'] = 'Core',
+	['Cobble Canyon'] = 'UndeFin',
+	['Deciduous forest'] = 'Retro_games428',
 	['chicky friendship'] = 'Core',
+	['shapeshifter'] = 'Alex1479',
+	['boogie boogie kitchen'] = 'Core',
+	
+	['Celestial islands'] = "Retro_games428",
+	['Aurora Garden'] = 'UndeFin',
+	['majestic melody'] = 'Core',
+	['Gloomy Heights'] = 'Greenlight',
+	['sherif bun fortress'] = 'Core',
+	
+	['el norado'] = 'Core',
 }
 
 
@@ -149,18 +168,18 @@ function onDraw()
 			loadAlpha = loadAlpha - 0.05
 		end
 		
-		if loadImg == nil and Misc.resolveFile(path .. 'devkit/loadscreen/' .. name .. '.png') then
-			loadImg = Graphics.loadImage(path .. 'devkit/loadscreen/' .. name .. '.png')
-		end
+		loadImg = Graphics.loadImage(path .. 'devkit/loadscreen/' .. name .. '.png')
 		
 		if loadImg then
 			Graphics.drawImage(loadImg, 400 - loadBox.width / 2, 300 - loadBox.height / 2)
 			Graphics.drawImage(loadBox, 400 - loadBox.width / 2, 300 - loadBox.height / 2)
 		end
 		
-		if names[name] then
+		local levelName = names[name] or name
+		
+		if levelName then
 			textplus.print{
-				text = names[name],
+				text = levelName,
 				
 				x = 400 - loadBox.width / 2,
 				y = (300 + loadBox.height / 2) + 16,

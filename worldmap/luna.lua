@@ -56,9 +56,9 @@ if langIsSet then
 		levels = {
 			{name = "Celestial islands", author = 'Retro_games428', fileName = 'Celestial islands.lvlx'},
 			-- {name = "Highest Tower", author = 'SonOfAHorde', fileName = nil},
-			{name = "Majestic Melody", author = 'Core', fileName = 'majestic melody.lvlx'},
 			-- {name = " - ", author = 'h2643', fileName = nil},
 			{name = "Aurora Garden", author = 'UndeFin', fileName = 'Aurora Garden.lvlx'},
+			{name = "Majestic Melody", author = 'Core', fileName = 'majestic melody.lvlx'},
 			{name = "Gloomy Heights", author = 'Greenlight', fileName = 'Gloomy Heights.lvlx'},
 			{iconName = "sherif.png", name = "Sherif Bun's Fortress", author = 'Core', fileName = 'sherif bun fortress.lvlx'},
 		}
