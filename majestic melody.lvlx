@@ -6,7 +6,7 @@ SC:0;L:-200000;R:-192000;T:-200928;B:-200000;MZ:24;MF:"majestic melody/WhiteChap
 SC:1;L:-180000;R:-171968;T:-180600;B:-180000;MZ:24;MF:"majestic melody/WhiteChapel.ogg";BG:58;XTRA:"{\n    \"darkness\"\: {\n        \"ambient\"\: \"#b4a1ffff\"\,\n        \"enableDarkness\"\: true\,\n        \"playerlight\"\: {\n            \"color\"\: \"#19d9ffff\"\,\n            \"enabled\"\: true\,\n            \"radius\"\: 256\n        }\n    }\,\n    \"effects\"\: {\n        \"weather\"\: 6\n    }\n}\n";
 SECTION_END
 STARTPOINT
-ID:1;X:-199884;Y:-200182;D:1;
+ID:1;X:-199964;Y:-200182;D:1;
 STARTPOINT_END
 BLOCK
 ID:88;X:-199744;Y:-200256;W:32;H:32;CN:183;

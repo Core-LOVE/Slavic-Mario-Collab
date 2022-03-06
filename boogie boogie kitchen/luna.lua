@@ -97,7 +97,45 @@ s:compileFromFile(nil, Misc.resolveFile("source.frag"))
 
 local img = Graphics.loadImageResolved 'overlay.png'
 
-function onCameraDraw()
+local buffer = Graphics.CaptureBuffer(camera.width,camera.height)
+
+function onCameraDraw(idx)
+	buffer:captureAt(-67)
+
+	for k,v in Block.iterate(26) do
+		local screenX,screenY = v.x-camera.x, v.y-camera.y
+		
+		local drawX = screenX
+		local drawY = camera.height-v.height
+		local textureX = screenX
+		local textureY = camera.height-v.height
+
+		local vertexCoords = {
+			(drawX)            ,(drawY)             ,
+			(drawX+v.width),(drawY)             ,
+			(drawX)            ,(drawY+v.height),
+			(drawX)            ,(drawY+v.height),
+			(drawX+v.width),(drawY)             ,
+			(drawX+v.width),(drawY+v.height),
+		}
+		
+		local textureCoords = {
+			((textureX            )/camera.width),((textureY  )/camera.height),
+			((textureX+v.width)/camera.width),((textureY  )/camera.height),
+			((textureX            )/camera.width),((textureY+v.height)/camera.height),
+			((textureX            )/camera.width),((textureY+v.height)/camera.height),
+			((textureX+v.width)/camera.width),((textureY  )/camera.height),
+			((textureX+v.width)/camera.width),((textureY+v.height)/camera.height),
+		}
+			
+		Graphics.glDraw{
+			texture = buffer,
+			vertexCoords = vertexCoords,
+			textureCoords = textureCoords,
+			priority = -66,
+		}
+	end
+	
 	if player.section ~= 3 then return end
 	
 	for k,v in ipairs(BGO.get(1)) do

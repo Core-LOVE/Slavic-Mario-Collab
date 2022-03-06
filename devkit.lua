@@ -42,7 +42,7 @@ ld.defaultStyleName = "rmc"
 _G.littleDialogue = ld
 _G.cutscene = require(path .. "cutscene")
 
-require(path .. "pause")
+_G.Pauser = require(path .. "pauser")
 
 local files = Misc.listFiles(Misc.episodePath() .. 'lang')
 for k,v in ipairs(files) do

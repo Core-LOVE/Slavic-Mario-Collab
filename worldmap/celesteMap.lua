@@ -264,6 +264,12 @@ function celesteMap.onInputUpdate()
 	local right = rawKeys.right
 	local jump = rawKeys.jump
 	
+	local worldCount = celesteMap.saveData.openedWorlds
+	
+	if worldCount > #celesteMap.worlds then
+		worldCount = #celesteMap.worlds
+	end
+	
 	if left == KEYS_PRESSED then
 		celesteMap.playSFX('select')
 		
@@ -276,7 +282,7 @@ function celesteMap.onInputUpdate()
 			toggleMeshes(world)		
 			celesteMap.world = (celesteMap.world - 1)
 			if celesteMap.world < 0 then
-				celesteMap.world = (celesteMap.saveData.openedWorlds - 1)
+				celesteMap.world = (worldCount - 1)
 			end
 			
 			local nextWorld = celesteMap.worlds[celesteMap.world + 1]
@@ -300,7 +306,7 @@ function celesteMap.onInputUpdate()
 			world.currentLevel = 0
 			
 			toggleMeshes(world)
-			celesteMap.world = (celesteMap.world + 1) % (celesteMap.saveData.openedWorlds)
+			celesteMap.world = (celesteMap.world + 1) % worldCount
 			toggleMeshes(celesteMap.worlds[celesteMap.world + 1])
 		
 			playMusic(world)

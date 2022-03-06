@@ -44,7 +44,7 @@ local function ct()
 	Routine.loop(192, darkness)
 	
 	Routine.wait(2)
-	Level.exit(1)
+	Level.load 'credits.lvlx'
 end
 
 function onEvent(n)

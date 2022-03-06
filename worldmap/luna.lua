@@ -55,41 +55,41 @@ if langIsSet then
 		
 		levels = {
 			{name = "Celestial islands", author = 'Retro_games428', fileName = 'Celestial islands.lvlx'},
-			{name = "Gloomy Heights", author = 'Greenlight', fileName = nil},
-			{name = "Highest Tower", author = 'SonOfAHorde', fileName = nil},
+			-- {name = "Highest Tower", author = 'SonOfAHorde', fileName = nil},
 			{name = "Majestic Melody", author = 'Core', fileName = 'majestic melody.lvlx'},
-			{name = " - ", author = 'h2643', fileName = nil},
-			{name = "Aurora Garden", author = 'UndeFin', fileName = nil},
+			-- {name = " - ", author = 'h2643', fileName = nil},
+			{name = "Aurora Garden", author = 'UndeFin', fileName = 'Aurora Garden.lvlx'},
+			{name = "Gloomy Heights", author = 'Greenlight', fileName = 'Gloomy Heights.lvlx'},
 			{iconName = "sherif.png", name = "Sherif Bun's Fortress", author = 'Core', fileName = 'sherif bun fortress.lvlx'},
 		}
 	}
 	
-	celesteMap.addWorld{
-		name = "Zahara",
-		iconName = "zahara.png",
-		musicName = "world3.ogg",
+	-- celesteMap.addWorld{
+		-- name = "Zahara",
+		-- iconName = "zahara.png",
+		-- musicName = "world3.ogg",
 		
-		bgName = "zaharaBg.png",
+		-- bgName = "zaharaBg.png",
 
-		ambient = Color.fromHexRGB(0xFF8300),
+		-- ambient = Color.fromHexRGB(0xFF8300),
 		
-		mesh = {
-			y = 420,
+		-- mesh = {
+			-- y = 420,
 			
-			{path = 'world3.obj', material = {color = Color.fromHexRGB(0xFFE566)}},
-			{path = 'world3_1.obj', material = {color = Color.fromHexRGB(0xC0C0C0)}},
-			{path = 'world3_2.obj', material = {color = Color.fromHexRGB(0x7F3300)}},	
-		},
+			-- {path = 'world3.obj', material = {color = Color.fromHexRGB(0xFFE566)}},
+			-- {path = 'world3_1.obj', material = {color = Color.fromHexRGB(0xC0C0C0)}},
+			-- {path = 'world3_2.obj', material = {color = Color.fromHexRGB(0x7F3300)}},	
+		-- },
 		
-		levels = {
-			{name = "Sand Dunes", author = 'Lookich', fileName = 'Sand Dunes.lvlx'},
-			{name = "El Norado", author = 'Core', fileName = 'el norado.lvlx'},
-			{name = "The Purple", author = 'Doki', fileName = nil},
-			{name = "Sandy Scrapyard", author = 'Greenlight', fileName = nil},
-			{name = " - ", author = 'UndeFin', fileName = nil},
-			{iconName = "hotie.png", name = "Hotbi's Gasline Temple", author = 'Core', fileName = nil},
-		}
-	}
+		-- levels = {
+			-- {name = "Sand Dunes", author = 'Lookich', fileName = 'Sand Dunes.lvlx'},
+			-- {name = "El Norado", author = 'Core', fileName = 'el norado.lvlx'},
+			-- {name = "The Purple", author = 'Doki', fileName = nil},
+			-- {name = "Sandy Scrapyard", author = 'Greenlight', fileName = nil},
+			-- {name = " - ", author = 'UndeFin', fileName = nil},
+			-- {iconName = "hotie.png", name = "Hotbi's Gasline Temple", author = 'Core', fileName = nil},
+		-- }
+	-- }
 	
 	return
 end

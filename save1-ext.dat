@@ -1,114 +1,122 @@
 {
 --[1]--
 {
-   ["optimized"]=false,
-   ["prologue.lvlx"]={2},
-   ["__launcher"]={3},
-   ["deciduous forest.lvlx"]={4},
-   ["cloversCount"]=4,
+   ["optimizeDarkness"]=false,
+   ["optimizeWeather"]=false,
+   ["__launcher"]={2},
+   ["deciduous forest.lvlx"]={3},
+   ["__costumes"]={4},
    ["Cobble Canyon.lvlx"]={5},
    ["celesteMap"]={6},
-   ["_basegame"]={7},
-   ["__costumes"]={8},
    ["_chosenLanguage"]=true,
-   ["chicky friendship.lvlx"]={9},
+   ["_basegame"]={7},
+   ["optimizeOther"]=false,
+   ["cloversCount"]=3,
+   ["prologue.lvlx"]={8},
    ["language"]="rus"
 },
 --[2]--
 {
-   ["__clovers"]={10}
+
 },
 --[3]--
 {
-
+   ["__clovers"]={9}
 },
 --[4]--
 {
-   ["__clovers"]={11}
+
 },
 --[5]--
 {
-   ["__clovers"]={12}
+   ["__clovers"]={10}
 },
 --[6]--
 {
-   ["maxLevels"]={13},
-   ["openedLevels"]={14},
+   ["maxLevels"]={11},
+   ["openedLevels"]={12},
    ["openedWorlds"]=1
 },
 --[7]--
 {
-   ["bigSwitch"]={15},
-   ["_characterdata"]={16},
-   ["starcoinCounter"]=5,
-   ["hud"]={17},
-   ["starcoin"]={18}
+   ["bigSwitch"]={13},
+   ["_characterdata"]={14},
+   ["starcoin"]={15},
+   ["hud"]={16},
+   ["starcoinCounter"]=5
 },
 --[8]--
 {
-
+   ["__clovers"]={17}
 },
 --[9]--
 {
-   ["__clovers"]={19}
+   [76]=true
 },
 --[10]--
 {
-   [38]=true
+   [2]=true
 },
 --[11]--
 {
-   [469]=true
+   6,
+   5,
+   6
 },
 --[12]--
 {
-   [0]=true
-},
---[13]--
-{
-   6,
-   7,
-   6
-},
---[14]--
-{
-   5,
+   4,
    1,
    1
 },
---[15]--
+--[13]--
 {
 
 },
+--[14]--
+{
+   ["8"]={18},
+   ["10"]={19},
+   ["9"]={20},
+   ["6"]={21},
+   ["16"]={22},
+   ["11"]={23},
+   ["12"]={24},
+   ["7"]={25},
+   ["15"]={26},
+   ["13"]={27},
+   ["14"]={28}
+},
+--[15]--
+{
+   ["worldmap.lvlx"]={29},
+   ["prologue.lvlx"]={30},
+   ["Cobble Canyon.lvlx"]={31},
+   ["deciduous forest.lvlx"]={32}
+},
 --[16]--
 {
-   ["8"]={20},
-   ["10"]={21},
-   ["9"]={22},
-   ["6"]={23},
-   ["16"]={24},
-   ["11"]={25},
-   ["12"]={26},
-   ["7"]={27},
-   ["15"]={28},
-   ["13"]={29},
-   ["14"]={30}
+   ["score"]=47250
 },
 --[17]--
 {
-   ["score"]=71150
+   [24]=true
 },
 --[18]--
 {
-   ["worldmap.lvlx"]={31},
-   ["prologue.lvlx"]={32},
-   ["deciduous forest.lvlx"]={33},
-   ["Cobble Canyon.lvlx"]={34},
-   ["chicky friendship.lvlx"]={35}
+   ["reservePowerup"]=0,
+   ["0x10A"]=0,
+   ["powerup"]=1,
+   ["0x16"]=1,
+   ["0x108"]=0
 },
 --[19]--
 {
-   [51]=true
+   ["reservePowerup"]=0,
+   ["0x10A"]=0,
+   ["powerup"]=1,
+   ["0x16"]=1,
+   ["0x108"]=0
 },
 --[20]--
 {
@@ -184,73 +192,43 @@
 },
 --[29]--
 {
-   ["reservePowerup"]=0,
-   ["0x10A"]=0,
-   ["powerup"]=1,
-   ["0x16"]=1,
-   ["0x108"]=0
+   ["maxID"]=0,
+   ["alive"]={33}
 },
 --[30]--
 {
-   ["reservePowerup"]=0,
-   ["0x10A"]=0,
-   ["powerup"]=1,
-   ["0x16"]=1,
-   ["0x108"]=0
+   1,
+   1,
+   ["maxID"]=2,
+   ["alive"]={34}
 },
 --[31]--
 {
    ["maxID"]=0,
-   ["alive"]={36}
+   ["alive"]={35}
 },
 --[32]--
 {
    1,
    1,
-   ["maxID"]=2,
-   ["alive"]={37}
+   1,
+   ["maxID"]=3,
+   ["alive"]={36}
 },
 --[33]--
 {
-   1,
-   0,
-   0,
-   ["maxID"]=3,
-   ["alive"]={38}
+
 },
 --[34]--
 {
-   ["maxID"]=0,
-   ["alive"]={39}
+   true,
+   true
 },
 --[35]--
 {
-   1,
-   1,
-   0,
-   ["maxID"]=3,
-   ["alive"]={40}
+
 },
 --[36]--
-{
-
-},
---[37]--
-{
-   true,
-   true
-},
---[38]--
-{
-   true,
-   true,
-   true
-},
---[39]--
-{
-
-},
---[40]--
 {
    true,
    true,
