@@ -1,0 +1,4 @@
+[first]
+frames=2
+gfxheight=34
+height=34

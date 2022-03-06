@@ -1,13 +1,14 @@
 HEAD
-TL:"Celestial islands";SZ:1;CPID:"SMBX1.3Compat";
+TL:"Celestial islands";SZ:1;CPID:"SMBX2";
 HEAD_END
 SECTION
-SC:0;L:-200000;R:-186080;T:-201024;B:-200160;MZ:24;MF:"Kirby s Return to Dream Land (Wii) - Cookie Country.ogg";BG:23;
-SC:1;L:-180000;R:-179104;T:-180600;B:-179904;MZ:24;MF:"Kirby s Return to Dream Land (Wii) - Cookie Country.ogg";BG:23;
-SC:2;L:-168128;R:-159200;T:-160864;B:-160000;MZ:24;MF:"Kirby s Return to Dream Land (Wii) - Cookie Country.ogg";BG:23;
-SC:3;L:-140000;R:-139104;T:-140736;B:-140000;MZ:24;MF:"Kirby s Return to Dream Land (Wii) - Cookie Country.ogg";BG:23;
-SC:4;L:-120000;R:-118944;T:-125824;B:-120000;MZ:24;MF:"Kirby s Return to Dream Land (Wii) - Cookie Country.ogg";BG:23;
-SC:5;L:-100000;R:-98464;T:-100704;B:-100000;MZ:24;MF:"Kirby s Return to Dream Land (Wii) - Cookie Country.ogg";BG:23;
+SC:0;L:-200000;R:-186080;T:-201024;B:-200160;MZ:24;MF:"Celestial islands/Kirby s Return to Dream Land (Wii) - Cookie Country.ogg";BG:23;
+SC:1;L:-180000;R:-179104;T:-180600;B:-179904;MZ:24;MF:"Celestial islands/Kirby s Return to Dream Land (Wii) - Cookie Country.ogg";BG:23;
+SC:2;L:-168128;R:-159200;T:-160864;B:-160000;MZ:24;MF:"Celestial islands/Kirby s Return to Dream Land (Wii) - Cookie Country.ogg";BG:23;
+SC:3;L:-140000;R:-139104;T:-140736;B:-140000;MZ:24;MF:"Celestial islands/Kirby s Return to Dream Land (Wii) - Cookie Country.ogg";BG:23;
+SC:4;L:-120000;R:-118944;T:-125824;B:-120000;MZ:24;MF:"Celestial islands/Kirby s Return to Dream Land (Wii) - Cookie Country.ogg";BG:23;
+SC:5;L:-100000;R:-98464;T:-100704;B:-100000;MZ:24;MF:"Celestial islands/Kirby s Return to Dream Land (Wii) - Cookie Country.ogg";BG:23;
+SC:6;L:-80000;R:-79200;T:-80600;B:-80000;MZ:0;MF:"";BG:0;
 SECTION_END
 STARTPOINT
 ID:1;X:-199980;Y:-200438;D:1;

@@ -10,15 +10,18 @@ local itembox = Graphics.loadImageResolved "devkit/itembox.png"
 local heart = Graphics.loadImageResolved 'devkit/heart.png'
 
 local clover = Graphics.loadImageResolved "devkit/clover.png"
+local coin = Graphics.loadImageResolved "devkit/coin.png"
 
 local textplus = require 'textplus'
 local font =  textplus.loadFont("textplus/font/2.ini")
+
+local starcoin
 
 local coinAdd = {}
 
 local function renderCoins(priority)
 	Graphics.drawBox{texture = hud1, x = 32, y = 32, priority = priority}
-	Graphics.drawBox{texture = Graphics.sprites.hardcoded['33-2'].img, x = 32 + 8, y = 32 + 8, priority = priority}	
+	Graphics.drawBox{texture = coin, x = 32 + 8, y = 32 + 8, priority = priority}	
 	
 	local count = mem(0x00B2C5A8, FIELD_WORD)
 	
@@ -176,6 +179,47 @@ local function renderBossHP(priority)
 	bosses = {}
 end
 
+local starcoinImg = Graphics.loadImageResolved('devkit/starcoin.png')
+
+local function validCoin(t, i)
+	return t[i] and (t.alive[i])
+end
+
+local function renderStarcoins(priority)
+	if not starcoin then return end
+	
+	local t = starcoin.getLevelList()
+	
+	if not t then return end
+	
+	local x = 32
+	local y = 96
+		
+	for i = 1, t.maxID do
+		local col = {0.5, 0.5, 0.5, 0.5}
+		
+		if t[i] ~= 0 then
+			col = nil
+		end
+		
+		Graphics.drawBox{
+			texture = starcoinImg,
+			
+			x = x,
+			y = y,
+			
+			color = col,
+		}
+		
+		x = x + starcoinImg.width + 2
+		
+		if i % 5 == 0 then
+			y = y + starcoinImg.height + 2
+			x = 32
+		end
+	end
+end
+
 local oldCoinCount = mem(0x00B2C5A8, FIELD_WORD)
 
 local noItembox = {
@@ -190,6 +234,7 @@ Graphics.overrideHUD(function(idx, priority, isSplit)
 	renderCoins(priority)
 	renderScore(priority)
 	renderBossHP(priority)
+	renderStarcoins(priority)
 	
 	if not noItembox[player.character] then
 		renderItembox(idx, priority)
@@ -259,7 +304,10 @@ function hud.showBossHP(args)
 end
 
 function hud.onInitAPI()
+	registerEvent(hud, 'onStart')
 	registerEvent(hud, 'onInputUpdate')
+	
+	starcoin = require("npcs/ai/starcoin")
 end
 
 return hud

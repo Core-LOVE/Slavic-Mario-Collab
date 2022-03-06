@@ -121,7 +121,7 @@ function npc.onCameraDrawNPC(v)
 	}
 	
 	if c == 1 then
-		Graphics.drawImageToSceneWP(img, v.x - 2, v.y - 2, 0, gfxheight, gfxwidth, gfxheight -15)
+		Graphics.drawImageToSceneWP(img, v.x - 2, v.y - 2, 0, gfxheight, gfxwidth, gfxheight, -15)
 	end
 end
 

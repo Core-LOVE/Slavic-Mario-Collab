@@ -5,6 +5,8 @@ local hud = require 'devkit/hud'
 local npcManager = require 'npcManager'
 local id = NPC_ID
 
+local maxHp = 7
+
 npcManager.setNpcSettings{
 	id = id,
 	
@@ -117,7 +119,7 @@ phases.onCameraDraw = function(v)
 	hud.showBossHP{
 		icon = icon,
 		amount = data.hp,
-		max = 8,
+		max = maxHp,
 	}
 end
 
@@ -227,6 +229,10 @@ local function death(v)
 	Misc.unpause()
 	Effect.spawn(752, n.x, n.y)
 	n:kill(9)
+	
+	Routine.wait(2)
+	local l = Layer.get("door")
+	l:toggle(false)
 end
 
 function boss.onNPCHarm(e, v, r, o)
@@ -268,7 +274,7 @@ function boss.onTickNPC(v)
 	if not data.init then
 		data.phaseTimer = 0
 		data.phase = 0
-		data.hp = 1
+		data.hp = maxHp
 		data.immune = 0
 		
 		data.init = true

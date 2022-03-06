@@ -61,7 +61,7 @@ local function ct()
 	Routine.loop(192, darkness)
 	
 	Routine.wait(2)
-	Level.exit(0)
+	Level.exit(LEVEL_WIN_TYPE_STAR)
 end
 
 function onEvent(n)
@@ -78,6 +78,8 @@ function onEvent(n)
 	elseif n == "section" then
 		Routine.run(bossMeet)
 	elseif n == "cutscene" then
+		Graphics.activateHud(false)
+		
 		local c = cutscene.new{
 			lockInput = true,
 			runWhilePaused = true,

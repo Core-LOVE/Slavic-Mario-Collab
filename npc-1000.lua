@@ -59,7 +59,7 @@ function npc.onNPCKill(e, v, r)
 	
 	SFX.play("devkit/win.ogg")
 
-	Level.finish(LEVEL_END_STATE_STAR, true)
+	local winType = 0
 	
 	if not(SaveData[Level.filename()] and SaveData[Level.filename()].__clovers and SaveData[Level.filename()].__clovers[v.idx]) then
 		SaveData[Level.filename()] = SaveData[Level.filename()] or {}
@@ -68,8 +68,11 @@ function npc.onNPCKill(e, v, r)
 		
 		SaveData.cloversCount = SaveData.cloversCount or 0
 		SaveData.cloversCount = SaveData.cloversCount + 1
+		
+		winType = LEVEL_WIN_TYPE_STAR
 	end
 	
+	Level.finish(winType, true)
 	p.forcedState = 8
 	
 	if animation == -1 then
@@ -139,7 +142,7 @@ function npc.onCameraDrawNPC(v)
 	}
 	
 	if c == 1 then
-		Graphics.drawImageToSceneWP(img, v.x - 2, v.y - 2, 0, gfxheight, gfxwidth, gfxheight -15)
+		Graphics.drawImageToSceneWP(img, v.x - 2, v.y - 2, 0, gfxheight, gfxwidth, gfxheight, -15)
 	end
 end
 

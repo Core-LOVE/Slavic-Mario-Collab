@@ -1,3 +1,4 @@
+_G.warpTransition = require 'warpTransition'
 local path = "devkit/"
 
 --Save stuff
@@ -52,3 +53,18 @@ for k,v in ipairs(files) do
 	
 	file:close()
 end
+
+local devkit = {}
+
+function devkit.onExitLevel(win)
+	if win <= 0 then return end
+	
+	local celesteMap = require('worldmap/celesteMap')
+	celesteMap.progress()
+end
+
+function devkit.onInitAPI()
+	registerEvent(devkit, 'onExitLevel')
+end
+
+return devkit

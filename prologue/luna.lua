@@ -1,9 +1,8 @@
-require 'warpTransition'
-local handycam = require 'handycam'
-
-local cam = handycam[1]
-
 local function cs(c)
+	local handycam = require 'handycam'
+
+	local cam = handycam[1]
+
 	local npc
 	local him
 	

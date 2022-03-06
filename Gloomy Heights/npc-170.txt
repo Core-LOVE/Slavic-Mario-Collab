@@ -1,0 +1,2 @@
+gfxwidth=28
+gfxoffsetx=0

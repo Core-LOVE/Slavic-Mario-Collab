@@ -1,0 +1,9 @@
+foreground=0
+npcblock=0
+noblockcollision=1
+noyoshi=1
+nofireball=1
+noiceball=1
+frames=1
+framestyle=0
+nohammer=1

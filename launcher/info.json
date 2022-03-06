@@ -1,0 +1,15 @@
+{
+	"mainPage": "index.html",
+	"allowedCharacters": [1],
+	
+	"collectibles": "☘︎",
+	"collectible": "☘︎",
+	
+	"starIcon": "clover.png",
+	"stars" : 29,
+
+	"allowPlayerSelection" : false,
+	"allowTwoPlayer": false,
+	"allowSaveSelection" : true,
+	"episodeIcon": "icon.png"
+}

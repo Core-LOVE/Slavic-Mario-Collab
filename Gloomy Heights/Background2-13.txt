@@ -1,0 +1,81 @@
+fill-color=0x000000
+
+[BG1]
+name="BG1"
+depth=-10
+priority = -6
+alignY=BOTTOM
+y = 80
+img="BG1.png"
+repeatX=true
+speedX=-1.5
+
+[BG1.5]
+name="BG1.5"
+depth=10
+priority = -95
+alignY=BOTTOM
+y = 0
+img="BG3.png"
+repeatX=true
+speedX=0
+
+[BG2]
+name="BG2"
+depth=30
+priority = -96
+alignY=BOTTOM
+y = 40
+img="BG1.png"
+repeatX=true
+speedX=-1
+
+[BG2.5]
+name="BG2.5"
+depth=45
+priority = -97
+alignY=BOTTOM
+y = 0
+img="BG4.png"
+repeatX=true
+speedX=0
+
+[BG3]
+name="BG3"
+depth=60
+priority = -98
+alignY=BOTTOM
+y = 10
+img="BG2.png"
+repeatX=true
+speedX=-0.5
+
+[BG3.5]
+name="BG3.5"
+depth=75
+priority = -99
+alignY=BOTTOM
+y = -80
+img="BG5.png"
+repeatX=true
+speedX=0
+
+[BG4]
+name="BG4"
+depth=90
+priority = -100
+alignY=BOTTOM
+y = 0
+img="BG2.png"
+repeatX=true
+speedX=-0.25
+
+[BG5]
+name="BG5"
+depth=-5
+priority = -101
+alignY=BOTTOM
+y = -120
+img="backdrop.png"
+repeatX=true
+speedX=0

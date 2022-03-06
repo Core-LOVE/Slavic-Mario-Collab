@@ -1,0 +1,4 @@
+lightradius=32
+lightbrightness=0.5
+lightcolor=#FFFF00FF
+lightflickes=1

@@ -39,7 +39,8 @@ local function restart()
 	alpha = 0
 	SFX.play 'devkit/unpause.ogg'
 	
-	Level.load()
+	local fileName = Level.filename()
+	Level.load(fileName)
 end
 
 SaveData.optimized = SaveData.optimized or false
@@ -98,7 +99,16 @@ local options = {
 			return restart()
 		end
 		
-		Misc.exitEngine()
+		if Level.filename() == 'worldmap.lvlx' then
+			Misc.exitEngine()
+		else
+			alpha = 0
+			SFX.play 'devkit/unpause.ogg'
+			
+			Misc.unpause()	
+		
+			Level.load('worldmap.lvlx')
+		end
 	end},
 }
 
@@ -227,6 +237,11 @@ function pause.onInputUpdate()
 	-- If our pause state is active, handle input
 	if myPauseActive then
 		local rk = player.rawKeys
+		
+		if rk.pause == KEYS_PRESSED then
+			Misc.unpause()
+			return
+		end
 		
 		if rk.down == KEYS_PRESSED then
 			SFX.play 'devkit/click.ogg'

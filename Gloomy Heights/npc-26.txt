@@ -1,0 +1,8 @@
+gfxwidth=32
+gfxheight=64
+gfxoffsety=0
+width=32
+height=62
+nogravity=0
+grabside=0
+noyoshi=1

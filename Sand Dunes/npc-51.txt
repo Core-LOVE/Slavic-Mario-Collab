@@ -1,0 +1,3 @@
+gfxoffsety=-2
+gfxheight=48
+height=48

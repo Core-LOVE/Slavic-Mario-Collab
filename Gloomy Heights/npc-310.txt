@@ -1,0 +1,7 @@
+gfxheight=48
+gfxwidth=48
+width=48
+height=48
+lightradius=48
+lightbrightness=0.5
+lightcolor=#FFFFFFFF

@@ -1,0 +1,4 @@
+gfxheight=126
+gfxwidth=128
+frames=4
+framespeed=10

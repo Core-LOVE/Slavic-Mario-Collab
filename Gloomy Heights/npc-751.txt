@@ -1,0 +1,3 @@
+lightradius=32
+lightbrightness=1
+lightcolor=#FF0000FF

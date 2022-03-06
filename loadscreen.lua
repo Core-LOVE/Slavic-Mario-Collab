@@ -120,9 +120,86 @@ local y = 600 - 42
 
 local t = 0
 
-local str = "Loading..."
+local str = 'Loading...'
+
+local loadBox = Graphics.loadImage(path .. 'devkit/loadBox.png')
+local loadCoin = Graphics.loadImage(path .. 'devkit/loadCoin.png')
+local loadImg
+local loadAlpha = 1
+
+local names = {
+	['el norado'] = 'El Norado',
+	['prologue'] = 'Prologue',
+	['chicky friendship'] = 'Chicky Friendship'
+}
+
+local authors = {
+	['el norado'] = 'Core',
+	['prologue'] = 'Core',
+	['chicky friendship'] = 'Core',
+}
+
 
 function onDraw()
+	-- loading img
+	local name = mem(0xB2C5A4, FIELD_STRING):gsub('.lvlx', '')
+	
+	if name ~= "" then
+		if loadAlpha > -1 then
+			loadAlpha = loadAlpha - 0.05
+		end
+		
+		if loadImg == nil and Misc.resolveFile(path .. 'devkit/loadscreen/' .. name .. '.png') then
+			loadImg = Graphics.loadImage(path .. 'devkit/loadscreen/' .. name .. '.png')
+		end
+		
+		if loadImg then
+			Graphics.drawImage(loadImg, 400 - loadBox.width / 2, 300 - loadBox.height / 2)
+			Graphics.drawImage(loadBox, 400 - loadBox.width / 2, 300 - loadBox.height / 2)
+		end
+		
+		if names[name] then
+			textplus.print{
+				text = names[name],
+				
+				x = 400 - loadBox.width / 2,
+				y = (300 + loadBox.height / 2) + 16,
+				
+				font = font,
+				
+				xscale = 2,
+				yscale = 2,
+			}	
+		end
+		
+		if authors[name] then
+			textplus.print{
+				text = authors[name],
+				
+				x = 400 - loadBox.width / 2,
+				y = (300 + loadBox.height / 2) + 32,
+				
+				font = font,
+				
+				color = Color.yellow,
+				
+				xscale = 1.5,
+				yscale = 1.5,
+			}	
+		end
+		
+		Graphics.drawBox{
+			x = 0,
+			y = 0,
+			width = 800,
+			height = 600,
+			
+			color = Color.black .. loadAlpha,
+			priority = 10,
+		}
+	end
+	
+	-- loading text
 	t = t + 1
 	
 	local dy = math.cos(t / 8) * 8 
