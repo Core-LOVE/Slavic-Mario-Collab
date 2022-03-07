@@ -61,7 +61,7 @@ local function ct()
 	Routine.loop(192, darkness)
 	
 	Routine.wait(2)
-	Level.exit(LEVEL_WIN_TYPE_STAR)
+	Level.finish(LEVEL_WIN_TYPE_STAR)
 end
 
 function onEvent(n)
