@@ -1,18 +1,22 @@
 {
 --[1]--
 {
-   ["optimizeDarkness"]=false,
    ["optimizeWeather"]=false,
    ["__launcher"]={2},
    ["deciduous forest.lvlx"]={3},
    ["__costumes"]={4},
-   ["Cobble Canyon.lvlx"]={5},
-   ["celesteMap"]={6},
+   ["chicky friendship.lvlx"]={5},
+   ["Celestial islands.lvlx"]={6},
+   ["disableShake"]=false,
+   ["optimizeDarkness"]=false,
+   ["prologue.lvlx"]={7},
+   ["cloversCount"]=10,
+   ["Cobble Canyon.lvlx"]={8},
+   ["celesteMap"]={9},
    ["_chosenLanguage"]=true,
-   ["_basegame"]={7},
+   ["_basegame"]={10},
    ["optimizeOther"]=false,
-   ["cloversCount"]=3,
-   ["prologue.lvlx"]={8},
+   ["shapeshifter.lvlx"]={11},
    ["language"]="rus"
 },
 --[2]--
@@ -21,7 +25,7 @@
 },
 --[3]--
 {
-   ["__clovers"]={9}
+   ["__clovers"]={12}
 },
 --[4]--
 {
@@ -29,126 +33,111 @@
 },
 --[5]--
 {
-   ["__clovers"]={10}
+   ["__clovers"]={13}
 },
 --[6]--
 {
-   ["maxLevels"]={11},
-   ["openedLevels"]={12},
-   ["openedWorlds"]=1
+   ["__clovers"]={14}
 },
 --[7]--
 {
-   ["bigSwitch"]={13},
-   ["_characterdata"]={14},
-   ["starcoin"]={15},
-   ["hud"]={16},
-   ["starcoinCounter"]=5
+   ["__clovers"]={15}
 },
 --[8]--
 {
-   ["__clovers"]={17}
+   ["__clovers"]={16}
 },
 --[9]--
 {
-   [76]=true
+   ["maxLevels"]={17},
+   ["world"]=1,
+   ["openedLevels"]={18},
+   ["openedWorlds"]=2
 },
 --[10]--
 {
-   [2]=true
+   ["bigSwitch"]={19},
+   ["_characterdata"]={20},
+   ["starcoinCounter"]=9,
+   ["hud"]={21},
+   ["starcoin"]={22}
 },
 --[11]--
+{
+   ["__clovers"]={23}
+},
+--[12]--
+{
+   [76]=true
+},
+--[13]--
+{
+   [66]=true
+},
+--[14]--
+{
+   [162]=true,
+   [158]=true,
+   [157]=true,
+   [159]=true,
+   [156]=true
+},
+--[15]--
+{
+   [24]=true
+},
+--[16]--
+{
+   [2]=true
+},
+--[17]--
 {
    6,
    5,
    6
 },
---[12]--
-{
-   4,
-   1,
-   1
-},
---[13]--
-{
-
-},
---[14]--
-{
-   ["8"]={18},
-   ["10"]={19},
-   ["9"]={20},
-   ["6"]={21},
-   ["16"]={22},
-   ["11"]={23},
-   ["12"]={24},
-   ["7"]={25},
-   ["15"]={26},
-   ["13"]={27},
-   ["14"]={28}
-},
---[15]--
-{
-   ["worldmap.lvlx"]={29},
-   ["prologue.lvlx"]={30},
-   ["Cobble Canyon.lvlx"]={31},
-   ["deciduous forest.lvlx"]={32}
-},
---[16]--
-{
-   ["score"]=47250
-},
---[17]--
-{
-   [24]=true
-},
 --[18]--
 {
-   ["reservePowerup"]=0,
-   ["0x10A"]=0,
-   ["powerup"]=1,
-   ["0x16"]=1,
-   ["0x108"]=0
+   6,
+   2,
+   3
 },
 --[19]--
 {
-   ["reservePowerup"]=0,
-   ["0x10A"]=0,
-   ["powerup"]=1,
-   ["0x16"]=1,
-   ["0x108"]=0
+
 },
 --[20]--
 {
-   ["reservePowerup"]=0,
-   ["0x10A"]=0,
-   ["powerup"]=1,
-   ["0x16"]=1,
-   ["0x108"]=0
+   ["8"]={24},
+   ["10"]={25},
+   ["9"]={26},
+   ["6"]={27},
+   ["16"]={28},
+   ["11"]={29},
+   ["12"]={30},
+   ["7"]={31},
+   ["15"]={32},
+   ["13"]={33},
+   ["14"]={34}
 },
 --[21]--
 {
-   ["reservePowerup"]=0,
-   ["0x10A"]=0,
-   ["powerup"]=1,
-   ["0x16"]=1,
-   ["0x108"]=0
+   ["score"]=152810
 },
 --[22]--
 {
-   ["reservePowerup"]=0,
-   ["0x10A"]=0,
-   ["powerup"]=1,
-   ["0x16"]=1,
-   ["0x108"]=0
+   ["worldmap.lvlx"]={35},
+   ["prologue.lvlx"]={36},
+   ["boogie boogie kitchen.lvlx"]={37},
+   ["chicky friendship.lvlx"]={38},
+   ["deciduous forest.lvlx"]={39},
+   ["shapeshifter.lvlx"]={40},
+   ["Cobble Canyon.lvlx"]={41},
+   ["Celestial islands.lvlx"]={42}
 },
 --[23]--
 {
-   ["reservePowerup"]=0,
-   ["0x10A"]=0,
-   ["powerup"]=1,
-   ["0x16"]=1,
-   ["0x108"]=0
+   [197]=true
 },
 --[24]--
 {
@@ -192,46 +181,140 @@
 },
 --[29]--
 {
-   ["maxID"]=0,
-   ["alive"]={33}
+   ["reservePowerup"]=0,
+   ["0x10A"]=0,
+   ["powerup"]=1,
+   ["0x16"]=1,
+   ["0x108"]=0
 },
 --[30]--
+{
+   ["reservePowerup"]=0,
+   ["0x10A"]=0,
+   ["powerup"]=1,
+   ["0x16"]=1,
+   ["0x108"]=0
+},
+--[31]--
+{
+   ["reservePowerup"]=0,
+   ["0x10A"]=0,
+   ["powerup"]=1,
+   ["0x16"]=1,
+   ["0x108"]=0
+},
+--[32]--
+{
+   ["reservePowerup"]=0,
+   ["0x10A"]=0,
+   ["powerup"]=1,
+   ["0x16"]=1,
+   ["0x108"]=0
+},
+--[33]--
+{
+   ["reservePowerup"]=0,
+   ["0x10A"]=0,
+   ["powerup"]=1,
+   ["0x16"]=1,
+   ["0x108"]=0
+},
+--[34]--
+{
+   ["reservePowerup"]=0,
+   ["0x10A"]=0,
+   ["powerup"]=1,
+   ["0x16"]=1,
+   ["0x108"]=0
+},
+--[35]--
+{
+   ["maxID"]=0,
+   ["alive"]={43}
+},
+--[36]--
 {
    1,
    1,
    ["maxID"]=2,
-   ["alive"]={34}
+   ["alive"]={44}
 },
---[31]--
+--[37]--
 {
-   ["maxID"]=0,
-   ["alive"]={35}
+   1,
+   0,
+   1,
+   ["maxID"]=3,
+   ["alive"]={45}
 },
---[32]--
+--[38]--
+{
+   1,
+   1,
+   0,
+   ["maxID"]=3,
+   ["alive"]={46}
+},
+--[39]--
 {
    1,
    1,
    1,
    ["maxID"]=3,
-   ["alive"]={36}
+   ["alive"]={47}
 },
---[33]--
+--[40]--
+{
+   ["maxID"]=0,
+   ["alive"]={48}
+},
+--[41]--
+{
+   ["maxID"]=0,
+   ["alive"]={49}
+},
+--[42]--
+{
+   ["maxID"]=0,
+   ["alive"]={50}
+},
+--[43]--
 {
 
 },
---[34]--
+--[44]--
 {
    true,
    true
 },
---[35]--
-{
-
-},
---[36]--
+--[45]--
 {
    true,
    true,
    true
+},
+--[46]--
+{
+   true,
+   true,
+   true
+},
+--[47]--
+{
+   true,
+   true,
+   true
+},
+--[48]--
+{
+
+},
+--[49]--
+{
+
+},
+--[50]--
+{
+
 }
 }

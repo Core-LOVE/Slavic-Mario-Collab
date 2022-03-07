@@ -177,9 +177,13 @@ end
 local blackScreen = false
 
 local function cutscene()
-	Routine.wait(48)
+	Routine.waitFrames(4)
 	
-	player.section = 1
+	if player.section ~= 1 then
+		Routine.wait(48)
+		
+		player.section = 1
+	end
 	
 	for k,reb in NPC.iterate(404) do
 		player.x = reb.x

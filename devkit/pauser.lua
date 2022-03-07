@@ -13,6 +13,8 @@ local initDark = {}
 local initWeather = {}
 
 function pause.onTick()
+	if not SaveData.disableShake then return end
+	
 	if Defines.earthquake ~= 0 then
 		Defines.earthquake = 0
 	end	
@@ -265,7 +267,7 @@ options[2] = {
 	name = 'Restart',
 	
 	action = function()
-		Level.load()
+		Level.load(Level.filename())
 		Misc.unpause()
 	end,
 }
@@ -315,6 +317,7 @@ translation['rus'] = {
 	['Settings'] = 'Настройки',
 	['Return'] = 'Вернуться',
 	['Change Language'] = 'Сменить Язык',
+	['Disable Screenshake'] = 'Отключить тряску камеры',
 	['Darkness'] = 'Темнота',
 	['Weather'] = 'Эффекты',
 	['Other Optimizations'] = 'Другие оптимизации',

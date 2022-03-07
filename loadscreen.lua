@@ -158,6 +158,10 @@ local authors = {
 	['el norado'] = 'Core',
 }
 
+local no = {
+	['credits'] = true,
+	['worldmap'] = true,
+}
 
 function onDraw()
 	-- loading img
@@ -177,7 +181,7 @@ function onDraw()
 		
 		local levelName = names[name] or name
 		
-		if levelName then
+		if levelName and not no[levelName] then
 			textplus.print{
 				text = levelName,
 				

@@ -33,9 +33,9 @@ local levelName = Level.filename()
 local font =  textplus.loadFont("font.ini")
 
 function celesteMap.progress()
-	local currentWorld = celesteMap.world
+	local currentWorld = celesteMap.saveData.openedWorlds - 1
 	-- local maxWorlds = #celesteMap.saveData.openedLevels
-	
+
 	local currentLevelCount = celesteMap.saveData.openedLevels
 	local maxLevels = celesteMap.saveData.maxLevels[currentWorld + 1]
 	
@@ -346,6 +346,8 @@ function celesteMap.onTick()
 	for k,mesh in ipairs(world.mesh) do
 		mesh.transform:rotate(0, 0.5, 0)
 	end
+	
+	celesteMap.saveData.world = celesteMap.world
 end
 
 function celesteMap.onInitAPI()

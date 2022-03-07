@@ -5,6 +5,14 @@ SaveData._chosenLanguage = SaveData._chosenLanguage or false
 local langIsSet = SaveData._chosenLanguage
 
 if langIsSet then
+	function onStart()
+		player.character = 1
+	end
+	
+	function onInputUpdate()
+		player.keys.dropItem = false
+	end
+	
 	local celesteMap = require 'celesteMap'
 
 	celesteMap.SFX = {
@@ -57,8 +65,8 @@ if langIsSet then
 			{name = "Celestial islands", author = 'Retro_games428', fileName = 'Celestial islands.lvlx'},
 			-- {name = "Highest Tower", author = 'SonOfAHorde', fileName = nil},
 			-- {name = " - ", author = 'h2643', fileName = nil},
-			{name = "Aurora Garden", author = 'UndeFin', fileName = 'Aurora Garden.lvlx'},
 			{name = "Majestic Melody", author = 'Core', fileName = 'majestic melody.lvlx'},
+			{name = "Aurora Garden", author = 'UndeFin', fileName = 'Aurora Garden.lvlx'},
 			{name = "Gloomy Heights", author = 'Greenlight', fileName = 'Gloomy Heights.lvlx'},
 			{iconName = "sherif.png", name = "Sherif Bun's Fortress", author = 'Core', fileName = 'sherif bun fortress.lvlx'},
 		}
@@ -140,6 +148,8 @@ function onInputUpdate()
 		SaveData._chosenLanguage = true
 		return Level.load()
 	end
+	
+	player.keys.dropItem = false
 end
 
 function onCameraDraw()
