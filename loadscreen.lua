@@ -127,100 +127,100 @@ local loadCoin = Graphics.loadImage(path .. 'devkit/loadCoin.png')
 local loadImg
 local loadAlpha = 1
 
-local names = {
-	['prologue'] = 'Prologue',
-	['Deciduous forest'] = 'Deciduous Forest',
-	['chicky friendship'] = 'Chicky Friendship',
-	['shapeshifter'] = 'Shapeshifter',
-	['boogie boogie kitchen'] = "Boogie Boogie's Kitchen",
+-- local names = {
+	-- ['prologue'] = 'Prologue',
+	-- ['Deciduous forest'] = 'Deciduous Forest',
+	-- ['chicky friendship'] = 'Chicky Friendship',
+	-- ['shapeshifter'] = 'Shapeshifter',
+	-- ['boogie boogie kitchen'] = "Boogie Boogie's Kitchen",
 	
-	['Celestial islands'] = "Celestial Islands",
-	['majestic melody'] = 'Majestic Melody',
-	['sherif bun fortress'] = "Sherif Bun's Fortress",
+	-- ['Celestial islands'] = "Celestial Islands",
+	-- ['majestic melody'] = 'Majestic Melody',
+	-- ['sherif bun fortress'] = "Sherif Bun's Fortress",
 	
-	['el norado'] = 'El Norado',
-}
+	-- ['el norado'] = 'El Norado',
+-- }
 
-local authors = {
-	['prologue'] = 'Core',
-	['Cobble Canyon'] = 'UndeFin',
-	['Deciduous forest'] = 'Retro_games428',
-	['chicky friendship'] = 'Core',
-	['shapeshifter'] = 'Alex1479',
-	['boogie boogie kitchen'] = 'Core',
+-- local authors = {
+	-- ['prologue'] = 'Core',
+	-- ['Cobble Canyon'] = 'UndeFin',
+	-- ['Deciduous forest'] = 'Retro_games428',
+	-- ['chicky friendship'] = 'Core',
+	-- ['shapeshifter'] = 'Alex1479',
+	-- ['boogie boogie kitchen'] = 'Core',
 	
-	['Celestial islands'] = "Retro_games428",
-	['Aurora Garden'] = 'UndeFin',
-	['majestic melody'] = 'Core',
-	['Gloomy Heights'] = 'Greenlight',
-	['sherif bun fortress'] = 'Core',
+	-- ['Celestial islands'] = "Retro_games428",
+	-- ['Aurora Garden'] = 'UndeFin',
+	-- ['majestic melody'] = 'Core',
+	-- ['Gloomy Heights'] = 'Greenlight',
+	-- ['sherif bun fortress'] = 'Core',
 	
-	['el norado'] = 'Core',
-}
+	-- ['el norado'] = 'Core',
+-- }
 
-local no = {
-	['credits'] = true,
-	['worldmap'] = true,
-}
+-- local no = {
+	-- ['credits'] = true,
+	-- ['worldmap'] = true,
+-- }
 
 function onDraw()
 	-- loading img
-	local name = mem(0xB2C5A4, FIELD_STRING):gsub('.lvlx', '')
+	-- local name = mem(0xB2C5A4, FIELD_STRING):gsub('.lvlx', '')
 	
-	if name ~= "" then
-		if loadAlpha > -1 then
-			loadAlpha = loadAlpha - 0.05
-		end
+	-- if name ~= "" then
+		-- if loadAlpha > -1 then
+			-- loadAlpha = loadAlpha - 0.05
+		-- end
 		
-		loadImg = Graphics.loadImage(path .. 'devkit/loadscreen/' .. name .. '.png')
+		-- loadImg = Graphics.loadImage(path .. 'devkit/loadscreen/' .. name .. '.png')
 		
-		if loadImg then
-			Graphics.drawImage(loadImg, 400 - loadBox.width / 2, 300 - loadBox.height / 2)
-			Graphics.drawImage(loadBox, 400 - loadBox.width / 2, 300 - loadBox.height / 2)
-		end
+		-- if loadImg then
+			-- Graphics.drawImage(loadImg, 400 - loadBox.width / 2, 300 - loadBox.height / 2)
+			-- Graphics.drawImage(loadBox, 400 - loadBox.width / 2, 300 - loadBox.height / 2)
+		-- end
 		
-		local levelName = names[name] or name
+		-- local levelName = names[name] or name
 		
-		if levelName and not no[levelName] then
-			textplus.print{
-				text = levelName,
+		-- if levelName and not no[levelName] then
+			-- textplus.print{
+				-- text = levelName,
 				
-				x = 400 - loadBox.width / 2,
-				y = (300 + loadBox.height / 2) + 16,
+				-- x = 400 - loadBox.width / 2,
+				-- y = (300 + loadBox.height / 2) + 16,
 				
-				font = font,
+				-- font = font,
 				
-				xscale = 2,
-				yscale = 2,
-			}	
-		end
+				-- xscale = 2,
+				-- yscale = 2,
+			-- }	
+		-- end
 		
-		if authors[name] then
-			textplus.print{
-				text = authors[name],
+		-- if authors[name] then
+			-- textplus.print{
+				-- text = authors[name],
 				
-				x = 400 - loadBox.width / 2,
-				y = (300 + loadBox.height / 2) + 32,
+				-- x = 400 - loadBox.width / 2,
+				-- y = (300 + loadBox.height / 2) + 32,
 				
-				font = font,
+				-- font = font,
 				
-				color = Color.yellow,
+				-- color = Color.yellow,
 				
-				xscale = 1.5,
-				yscale = 1.5,
-			}	
-		end
+				-- xscale = 1.5,
+				-- yscale = 1.5,
+			-- }	
+		-- end
 		
-		Graphics.drawBox{
-			x = 0,
-			y = 0,
-			width = 800,
-			height = 600,
+		-- Graphics.drawBox{
+			-- x = 0,
+			-- y = 0,
+			-- width = 800,
+			-- height = 600,
 			
-			color = Color.black .. loadAlpha,
-			priority = 10,
-		}
-	end
+			-- color = Color.black .. loadAlpha,
+			-- priority = 10,
+		-- }
+	-- end
 	
 	-- loading text
 	t = t + 1
