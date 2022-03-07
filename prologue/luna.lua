@@ -50,6 +50,7 @@ local function cs(c)
 	Routine.wait(0.75)
 	littleDialogue.create{text = "<speakerName ???>Bowser?! H-hey! Don't leave me here!"}
 	Routine.waitFrames(2)
+	npc:kill(9)
 	
 	him.direction = 1
 	

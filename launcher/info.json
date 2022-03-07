@@ -10,6 +10,6 @@
 
 	"allowPlayerSelection" : false,
 	"allowTwoPlayer": false,
-	"allowSaveSelection" : true,
+
 	"episodeIcon": "icon.png"
 }
