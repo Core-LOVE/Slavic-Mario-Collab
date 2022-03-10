@@ -1,0 +1,9 @@
+[1]
+rotation=12
+xAlign=CENTER
+yAlign=CENTER
+spawnBindX=CENTER
+spawnBindY=CENTER
+lifetime = 180
+speedY = -11
+gravity=0.25

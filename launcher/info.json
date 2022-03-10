@@ -5,9 +5,6 @@
 	"collectibles": "☘︎",
 	"collectible": "☘︎",
 	
-	"starIcon": "clover.png",
-	"stars" : 29,
-
 	"allowPlayerSelection" : false,
 	"allowTwoPlayer": false,
 

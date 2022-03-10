@@ -123,7 +123,6 @@ local t = 0
 local str = 'Loading...'
 
 local loadBox = Graphics.loadImage(path .. 'devkit/loadBox.png')
-local loadCoin = Graphics.loadImage(path .. 'devkit/loadCoin.png')
 local loadImg
 local loadAlpha = 1
 

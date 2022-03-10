@@ -1,0 +1,199 @@
+{
+--[1]--
+{
+   ["optimizeDarkness"]=false,
+   ["optimizeWeather"]=false,
+   ["__launcher"]={2},
+   ["cloversCount"]=1,
+   ["language"]="rus",
+   ["_chosenLanguage"]=true,
+   ["disableShake"]=false,
+   ["_basegame"]={3},
+   ["optimizeOther"]=false,
+   ["__costumes"]={4},
+   ["prologue.lvlx"]={5},
+   ["celesteMap"]={6}
+},
+--[2]--
+{
+
+},
+--[3]--
+{
+   ["bigSwitch"]={7},
+   ["_characterdata"]={8},
+   ["starcoinCounter"]=2,
+   ["hud"]={9},
+   ["starcoin"]={10}
+},
+--[4]--
+{
+
+},
+--[5]--
+{
+   ["__clovers"]={11}
+},
+--[6]--
+{
+   ["maxLevels"]={12},
+   ["openedWorlds"]=1,
+   ["finishedWorlds"]={13},
+   ["world"]=0,
+   ["openedLevels"]={14}
+},
+--[7]--
+{
+
+},
+--[8]--
+{
+   ["8"]={15},
+   ["10"]={16},
+   ["9"]={17},
+   ["6"]={18},
+   ["16"]={19},
+   ["11"]={20},
+   ["12"]={21},
+   ["7"]={22},
+   ["15"]={23},
+   ["13"]={24},
+   ["14"]={25}
+},
+--[9]--
+{
+   ["score"]=16220
+},
+--[10]--
+{
+   ["worldmap.lvlx"]={26},
+   ["prologue.lvlx"]={27}
+},
+--[11]--
+{
+   [15]=true
+},
+--[12]--
+{
+   6,
+   5
+},
+--[13]--
+{
+
+},
+--[14]--
+{
+   2,
+   1
+},
+--[15]--
+{
+   ["reservePowerup"]=0,
+   ["0x10A"]=0,
+   ["powerup"]=1,
+   ["0x16"]=1,
+   ["0x108"]=0
+},
+--[16]--
+{
+   ["reservePowerup"]=0,
+   ["0x10A"]=0,
+   ["powerup"]=1,
+   ["0x16"]=1,
+   ["0x108"]=0
+},
+--[17]--
+{
+   ["reservePowerup"]=0,
+   ["0x10A"]=0,
+   ["powerup"]=1,
+   ["0x16"]=1,
+   ["0x108"]=0
+},
+--[18]--
+{
+   ["reservePowerup"]=0,
+   ["0x10A"]=0,
+   ["powerup"]=1,
+   ["0x16"]=1,
+   ["0x108"]=0
+},
+--[19]--
+{
+   ["reservePowerup"]=0,
+   ["0x10A"]=0,
+   ["powerup"]=1,
+   ["0x16"]=1,
+   ["0x108"]=0
+},
+--[20]--
+{
+   ["reservePowerup"]=0,
+   ["0x10A"]=0,
+   ["powerup"]=1,
+   ["0x16"]=1,
+   ["0x108"]=0
+},
+--[21]--
+{
+   ["reservePowerup"]=0,
+   ["0x10A"]=0,
+   ["powerup"]=1,
+   ["0x16"]=1,
+   ["0x108"]=0
+},
+--[22]--
+{
+   ["reservePowerup"]=0,
+   ["0x10A"]=0,
+   ["powerup"]=1,
+   ["0x16"]=1,
+   ["0x108"]=0
+},
+--[23]--
+{
+   ["reservePowerup"]=0,
+   ["0x10A"]=0,
+   ["powerup"]=1,
+   ["0x16"]=1,
+   ["0x108"]=0
+},
+--[24]--
+{
+   ["reservePowerup"]=0,
+   ["0x10A"]=0,
+   ["powerup"]=1,
+   ["0x16"]=1,
+   ["0x108"]=0
+},
+--[25]--
+{
+   ["reservePowerup"]=0,
+   ["0x10A"]=0,
+   ["powerup"]=1,
+   ["0x16"]=1,
+   ["0x108"]=0
+},
+--[26]--
+{
+   ["maxID"]=0,
+   ["alive"]={28}
+},
+--[27]--
+{
+   1,
+   1,
+   ["maxID"]=2,
+   ["alive"]={29}
+},
+--[28]--
+{
+
+},
+--[29]--
+{
+   true,
+   true
+}
+}

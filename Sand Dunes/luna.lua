@@ -1,4 +1,23 @@
 local rng = loadSharedAPI("base/rng");
+local rooms = require("rooms");
+local roomstable = table.map{6}
+local darkness = require("darkness")
+local DarknessField = darkness.create 
+	{
+	section = 0,
+ 	ambient = Color.fromHexRGB(0x444444),
+	shadows = darkness.shadow.HARD_RAYMARCH
+	}
+local sandstorm = Particles.Emitter(0,0, Misc.resolveFile("particles/p_sandstorm.ini"))
+sandstorm:AttachToCamera(camera)
+
+function onDraw()
+	if not (roomstable[rooms.currentRoomIndex]) then
+		sandstorm:Draw(2)
+	else
+		sandstorm:KillParticles()
+	end
+end
 
 function onLoop()
 	for j,w in pairs(NPC.get(245,player.section)) do
@@ -45,48 +64,52 @@ pipeAPI.SFX = 22 -- default value (bullet bill sfx), set to 0 for silent
 -- Visual effect for firing
 pipeAPI.effect = 10 -- set to 0 for none
 
-function onLoadSection1()
-	if player.section == 1 then
-		triggerEvent("bonus")
-	end
-end
-
-function onLoadSection2()
-	if player.section == 2 then
-		triggerEvent("eight mice show")
-	end
-end
-
 function onTick()
-	if player.section == 1 and not player.hasStarman then
-		Audio.MusicVolume(15)
-	elseif not player.hasStarman then
-		Audio.MusicVolume(40)
-	else
-		Audio.MusicPause() 
-	end
-	if player.x >= -193248 then
+	if roomstable[rooms.currentRoomIndex] then
+        DarknessField.section = 0
+		if not player.hasStarman then
+			Audio.MusicVolume(15)
+		else
+			Audio.MusicPause() 
+		end
+		triggerEvent("bonus")
+    else
+		DarknessField.section = 1
+		if not player.hasStarman then
+			Audio.MusicVolume(40)
+		else
+			Audio.MusicPause() 
+		end
+    end
+	if player.x >= -193248 and player.x <= -192864 then
 		triggerEvent("king bill 1 hide")
 	end
-	if player.section == 0 and player.x >= -185184 then
+	if player.x >= -185184 and player.x <= -184800 then
 		triggerEvent("king bill 2 hide")
 	end
-	if (player.x >= -156832) or (player.x >= -157248 and player.y <= -160704) then
+	if ((player.x >= -175776) or (player.x >= -176192 and player.y <= -200832)) and player.x <= -175392 then
 		triggerEvent("king bill 3 hide")
 	end
-	if player.x >= -153024 then
+	if player.x >= -171968 and player.x <= -171584 then
 		triggerEvent("king bill 4 hide")
+	end
+	if (player.x >= -178944 and player.x <= -160640 and player.y >= -200032) or (player.x >= -200000 and player.x <= -179104 and player.y >= -199936 and (not roomstable[rooms.currentRoomIndex])) then
+		if player:mem(0x140,FIELD_WORD) == 0 --[[changing powerup state]] and player.deathTimer == 0 --[[already dead]] then
+			player:kill()
+		end
 	end
 end
 
 function onCameraUpdate()
-	if player.x >= -155520 and player.x <= -154848 and player.y <= -160642 and player.section == 2 then
-		triggerEvent("sc3")
-	end
-	if player.x <= -159552 and player.y <= -160642 and player.section == 2 then
-		triggerEvent("hammer pos")
-	end
-	if player.y >= -160320 and player.section == 2 then
-		triggerEvent("sc3 pos hide")
+	if player.x <= -187664 and (roomstable[rooms.currentRoomIndex]) then
+		triggerEvent("sc2")
+	elseif player.x <= -179488 and not (player.x >= -187664 and player.y >= -199776) then
+		triggerEvent("defpos")
+	elseif (player.x >= -179424 and player.x <= -178624) or (player.x >= -187664 and player.y >= -199776) then
+		triggerEvent("defpos15")
+	elseif player.x >= -178624 and not (player.x <= -178176 and player.y <= -200768) and not (player.x >= -174528 and player.x <= -173728 and player.y <= -200736) then
+		triggerEvent("defpos2")
+	elseif (player.x <= -178176 and player.y <= -200768) or (player.x >= -174528 and player.x <= -173728 and player.y <= -200736) then
+		triggerEvent("sc3pos")
 	end
 end

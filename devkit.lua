@@ -1,9 +1,10 @@
-_G.warpTransition = require 'warpTransition'
 local path = "devkit/"
+_G.warpTransition = require(path .. 'warpTransition')
 
 --Save stuff
 SaveData.language = SaveData.language or 'usa'
 
+require(path .. 'death')
 require(path .. "hud")
 local ld = require('littleDialogue')
 ld.registerStyle("rmc",{
@@ -40,19 +41,33 @@ ld.registerStyle("rmc",{
 ld.defaultStyleName = "rmc"
 
 _G.littleDialogue = ld
-_G.cutscene = require(path .. "cutscene")
 
-_G.Pauser = require(path .. "pauser")
+_G.Languages = {
+	['usa'] = Graphics.loadImageResolved('lang/usa.png')
+}
+
+_G.LanguagesName = {
+	['usa'] = 'English',
+}
 
 local files = Misc.listFiles(Misc.episodePath() .. 'lang')
 for k,v in ipairs(files) do
-	local path = Misc.resolveFile('lang/' .. v)
-	
-	local file = io.open(path)
-	loadstring(file:read("*a"))()
-	
-	file:close()
+	if v:find('.lua') then
+		local path = Misc.resolveFile('lang/' .. v)
+		
+		local file = io.open(path)
+		loadstring(file:read("*a"))()
+		
+		file:close()
+		
+		local name = v:gsub('.lua', '')
+		Languages[name] = Graphics.loadImageResolved('lang/' .. name .. '.png')
+	end
 end
+
+_G.cutscene = require(path .. "cutscene")
+
+_G.Pauser = require(path .. "pauser")
 
 local devkit = {}
 

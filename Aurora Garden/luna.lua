@@ -2,7 +2,7 @@ local timer = -99
 local invert = 1
 
 function onTick()
-    if (player.keys.jump == KEYS_PRESSED or player.keys.altJump == KEYS_PRESSED) and player:isOnGround() and timer == -99 and player.forcedState == 0 then
+    if (player.keys.jump == KEYS_PRESSED or player.keys.altJump == KEYS_PRESSED) and player:isOnGround() and timer <= 0 and player.forcedState == 0 then
         timer = 64
     end
 

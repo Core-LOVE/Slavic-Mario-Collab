@@ -1,6 +1,8 @@
 local lockInput = false
 local ending = false
 
+GameData.rulesAppear = GameData.rulesAppear or false
+
 local transition = {
 	state = 0,
 	timer = 0,
@@ -23,10 +25,12 @@ function onInputUpdate()
 end
 
 function onEvent(n)
+	if GameData.rulesAppear then return end
+		
 	if n == 'appear' then
 		SFX.play 'appear.ogg'
 		lockInput = true
-		
+
 		Audio.SeizeStream(player.section)
 		Audio.MusicStop()
 	elseif n == "dialogue" then
@@ -47,6 +51,8 @@ function onEvent(n)
 			style = 'dr',
 		}
 	elseif n == "disappear" then
+		GameData.rulesAppear = true
+		
 		ending = true
 		SFX.play 'slidewhist.wav'
 	end

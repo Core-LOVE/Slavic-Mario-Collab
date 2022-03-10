@@ -47,6 +47,9 @@ local function darkness()
 end
 
 local function ct()
+	player.direction = 1
+	Pauser.disabled = true
+	
 	Routine.wait(1.5)
 	player.speedX = 1
 	
@@ -61,6 +64,7 @@ local function ct()
 	Routine.loop(192, darkness)
 	
 	Routine.wait(2)
+	
 	Level.finish(LEVEL_WIN_TYPE_STAR)
 end
 

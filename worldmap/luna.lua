@@ -19,7 +19,7 @@ if langIsSet then
 		select = 'devkit/click.ogg',
 		choose = 'devkit/unpause.ogg',
 	}
-
+	
 	celesteMap.addWorld{
 		name = "Caucazeus",
 		iconName = "caucazeus.png",
@@ -66,42 +66,68 @@ if langIsSet then
 			-- {name = "Highest Tower", author = 'SonOfAHorde', fileName = nil},
 			-- {name = " - ", author = 'h2643', fileName = nil},
 			{name = "Majestic Melody", author = 'Core', fileName = 'majestic melody.lvlx'},
-			{name = "Aurora Garden", author = 'UndeFin', fileName = 'Aurora Garden.lvlx'},
 			{name = "Gloomy Heights", author = 'Greenlight', fileName = 'Gloomy Heights.lvlx'},
+			{name = "Aurora Garden", author = 'UndeFin', fileName = 'Aurora Garden.lvlx'},
 			{iconName = "sherif.png", name = "Sherif Bun's Fortress", author = 'Core', fileName = 'sherif bun fortress.lvlx'},
 		}
 	}
 	
-	-- celesteMap.addWorld{
-		-- name = "Zahara",
-		-- iconName = "zahara.png",
-		-- musicName = "world3.ogg",
+	celesteMap.addWorld{
+		name = "Zahara",
+		iconName = "zahara.png",
+		musicName = "world3.ogg",
 		
-		-- bgName = "zaharaBg.png",
+		bgName = "zaharaBg.png",
 
-		-- ambient = Color.fromHexRGB(0xFF8300),
+		ambient = Color.fromHexRGB(0xFF8300),
 		
-		-- mesh = {
-			-- y = 420,
+		mesh = {
+			y = 420,
 			
-			-- {path = 'world3.obj', material = {color = Color.fromHexRGB(0xFFE566)}},
-			-- {path = 'world3_1.obj', material = {color = Color.fromHexRGB(0xC0C0C0)}},
-			-- {path = 'world3_2.obj', material = {color = Color.fromHexRGB(0x7F3300)}},	
-		-- },
+			{path = 'world3.obj', material = {color = Color.fromHexRGB(0xFFE566)}},
+			{path = 'world3_1.obj', material = {color = Color.fromHexRGB(0xC0C0C0)}},
+			{path = 'world3_2.obj', material = {color = Color.fromHexRGB(0x7F3300)}},	
+		},
 		
-		-- levels = {
-			-- {name = "Sand Dunes", author = 'Lookich', fileName = 'Sand Dunes.lvlx'},
-			-- {name = "El Norado", author = 'Core', fileName = 'el norado.lvlx'},
-			-- {name = "The Purple", author = 'Doki', fileName = nil},
-			-- {name = "Sandy Scrapyard", author = 'Greenlight', fileName = nil},
-			-- {name = " - ", author = 'UndeFin', fileName = nil},
-			-- {iconName = "hotie.png", name = "Hotbi's Gasline Temple", author = 'Core', fileName = nil},
-		-- }
-	-- }
+		levels = {
+			{name = "Sand Dunes", author = 'Lookich', fileName = 'Sand Dunes.lvlx'},
+			{name = "El Norado", author = 'Core', fileName = 'el norado.lvlx'},
+			{name = "The Purple", author = 'Doki', fileName = nil},
+			{name = "Sandy Scrapyard", author = 'Greenlight', fileName = nil},
+			{name = " - ", author = 'UndeFin', fileName = nil},
+			{iconName = "hotie.png", name = "Hotbi's Gasline Temple", author = 'Core', fileName = nil},
+		}
+	}
+	
+	celesteMap.addWorld{
+		name = "Anterpole",
+		iconName = "anterpole.png",
+		musicName = 'world4.ogg',
+		
+		ambient = Color.fromHexRGB(0x255EB2),
+		
+		bgName = 'anterpoleBg.png',
+		
+		mesh = {
+			{path = 'world4.obj', material = {color = Color.fromHexRGB(0xE5FAFF)}},
+			{path = 'world4_1.obj', material = {color = Color.fromHexRGB(0x8EE547)}},
+			{path = 'world4_2.obj', material = {color = Color.fromHexRGB(0x31BCBC)}},
+		},
+		
+		levels = {
+			{name = "Prologue", author = 'Core', fileName = 'prologue.lvlx'},	
+			{name = "Cobble Canyon", author = 'UndeFin', fileName = 'Cobble Canyon.lvlx'},
+			{name = "Deciduous Forest", author = 'Retro_games428', fileName = 'deciduous forest.lvlx'},
+			{name = "Chicky Friendship", author = 'Core', fileName = 'chicky friendship.lvlx'},
+			{name = "Shapeshifter", author = 'Alex1479', fileName = 'shapeshifter.lvlx'},
+			{iconName = "boogie.png", name = "Boogie Boogie's Kitchen", author = 'Core', fileName = 'boogie boogie kitchen.lvlx'},
+		}
+	}
 	
 	return
 end
 
+Pauser.disabled = true
 local textplus = require 'textplus'
 local font =  textplus.loadFont("devkit/font.ini")
 
@@ -110,15 +136,26 @@ function onStart()
 	SFX.play(47)
 end
 
-local text = {
-	['usa'] = 'Choose language!',
-	['rus'] = 'Выберите язык!',
-}
+-- local text = {
+	-- ['usa'] = 'Choose language!',
+	-- ['rus'] = 'Выберите язык!',
+-- }
 
-local langs = {
-	{'usa', name = 'English'},
-	{'rus', name = 'Русский'},
-}
+local langs = {}
+	
+do
+	local count = 1
+	
+	for k,v in pairs(LanguagesName) do
+		langs[count] = {img = Languages[k], name = v, index = k}
+		
+		count = count + 1
+	end
+end
+
+table.sort(langs, function(a,b)
+	return (a.index == 'usa')
+end)
 
 local currentLang = (SaveData.language == 'usa' and 0) or 1
 
@@ -133,7 +170,7 @@ function onInputUpdate()
 		currentLang = (currentLang + 1) % #langs
 		
 		local lang = langs[currentLang + 1]
-		SaveData.language = lang[1]
+		SaveData.language = lang.index
 	elseif keys.up == KEYS_PRESSED then
 		SFX.play 'devkit/click.ogg'
 		currentLang = (currentLang - 1)
@@ -143,7 +180,7 @@ function onInputUpdate()
 		end
 		
 		local lang = langs[currentLang + 1]
-		SaveData.language = lang[1]		
+		SaveData.language = lang.index
 	elseif keys.jump then
 		SaveData._chosenLanguage = true
 		return Level.load()
@@ -153,8 +190,15 @@ function onInputUpdate()
 end
 
 function onCameraDraw()
+	local text = 'Choose language!'
+	local lang = SaveData.language
+
+	if lang ~= 'usa' and littleDialogue.translation[lang] and littleDialogue.translation[lang][text] then
+		text = littleDialogue.translation[lang][text]
+	end
+	
 	textplus.print{
-		text = text[SaveData.language],
+		text = text,
 		
 		x = 232,
 		y = 32,
@@ -170,10 +214,6 @@ function onCameraDraw()
 	
 	for key = 1, #langs do
 		local lang = langs[key]
-		
-		if lang.img == nil then
-			lang.img = Graphics.loadImageResolved('devkit/' .. lang[1] .. '.png')
-		end
 		
 		Graphics.drawBox{
 			texture = lang.img,

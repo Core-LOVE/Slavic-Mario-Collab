@@ -57,6 +57,7 @@ function npc.onNPCKill(e, v, r)
 		Audio.MusicChange(k - 1, 0)
 	end
 	
+	p.y = p.y - (54 - p.height) 
 	SFX.play("devkit/win.ogg")
 
 	local winType = 0

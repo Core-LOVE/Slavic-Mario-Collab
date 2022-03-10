@@ -1,4 +1,4 @@
-local pauseDebug = true
+local pauseDebug = false
 
 local pause = {}
 pause.disabled = false
@@ -80,17 +80,20 @@ end
 
 local options = {}
 
-local langs = {
-	'usa',
-	'rus',
-}
+local langs = {}
 
-local icons = {}
-local check = Graphics.loadImageResolved 'devkit/check.png'
-
-for k,v in ipairs(langs) do
-	icons[v] = Graphics.loadImageResolved('devkit/' .. v .. '.png')
+do
+	local count = 1
+	
+	for k,v in pairs(Languages) do
+		langs[count] = k
+		
+		count = count + 1
+	end
 end
+
+local icons = _G.Languages
+local check = Graphics.loadImageResolved 'devkit/check.png'
 
 local settings = {
 	name = 'Settings',
@@ -263,16 +266,22 @@ options[1] = {
 	end,
 }
 
-options[2] = {
-	name = 'Restart',
-	
-	action = function()
-		Level.load(Level.filename())
-		Misc.unpause()
-	end,
-}
+local count = 2
 
-options[3] = {
+if Level.filename() ~= 'worldmap.lvlx' then
+	options[count] = {
+		name = 'Restart',
+		
+		action = function()
+			Level.load(Level.filename())
+			Misc.unpause()
+		end,
+	}
+	
+	count = count + 1
+end
+
+options[count] = {
 	name = 'Settings',
 	
 	action = function()
@@ -282,8 +291,9 @@ options[3] = {
 		options.parent = parent
 	end,
 }
+count = count + 1
 
-options[4] = {
+options[count] = {
 	name = 'Exit',
 	
 	action = function()
@@ -306,22 +316,22 @@ options[4] = {
 	end,
 }
 
-local translation = {}
+-- local translation = {}
 
-translation['rus'] = {
-	['Menu'] = 'Меню',
-	['Continue'] = 'Продолжить',
-	['Restart'] = 'Рестарт',
-	['Exit'] = 'Выйти',
+-- translation['rus'] = {
+	-- ['Menu'] = 'Меню',
+	-- ['Continue'] = 'Продолжить',
+	-- ['Restart'] = 'Рестарт',
+	-- ['Exit'] = 'Выйти',
 	
-	['Settings'] = 'Настройки',
-	['Return'] = 'Вернуться',
-	['Change Language'] = 'Сменить Язык',
-	['Disable Screenshake'] = 'Отключить тряску камеры',
-	['Darkness'] = 'Темнота',
-	['Weather'] = 'Эффекты',
-	['Other Optimizations'] = 'Другие оптимизации',
-}
+	-- ['Settings'] = 'Настройки',
+	-- ['Return'] = 'Вернуться',
+	-- ['Change Language'] = 'Сменить Язык',
+	-- ['Disable Screenshake'] = 'Отключить тряску камеры',
+	-- ['Darkness'] = 'Темнота',
+	-- ['Weather'] = 'Эффекты',
+	-- ['Other Optimizations'] = 'Другие оптимизации',
+-- }
 
 function pause.onInputUpdate()
 	if pauseDebug and Misc.GetKeyState(0x43) and not Misc.isPaused() then
@@ -337,6 +347,8 @@ function pause.onInputUpdate()
 
 	-- If our pause state is active, handle input
 	if myPauseActive then
+		player.keys.dropItem = false
+		
 		local rk = player.rawKeys
 		
 		if (rk.run == KEYS_PRESSED) then
@@ -421,8 +433,8 @@ function pause.onDraw()
 	do
 		local name = options.name
 		
-		if lang ~= 'usa' and translation[lang] and translation[lang][name] then
-			name = translation[lang][name]
+		if lang ~= 'usa' and littleDialogue.translation[lang] and littleDialogue.translation[lang][name] then
+			name = littleDialogue.translation[lang][name]
 		end
 		
 		Graphics.drawBox{
@@ -449,8 +461,8 @@ function pause.onDraw()
 	for index, option in ipairs(options) do
 		local name = option.name
 		
-		if lang ~= 'usa' and translation[lang] and translation[lang][name] then
-			name = translation[lang][name]
+		if lang ~= 'usa' and littleDialogue.translation[lang] and littleDialogue.translation[lang][name] then
+			name = littleDialogue.translation[lang][name]
 		end
 		
 		Graphics.drawBox{

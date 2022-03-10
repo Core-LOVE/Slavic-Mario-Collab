@@ -11,6 +11,7 @@ celesteMap.saveData = SaveData.celesteMap
 celesteMap.saveData.openedWorlds = celesteMap.saveData.openedWorlds or 1
 celesteMap.saveData.openedLevels = celesteMap.saveData.openedLevels or {}
 celesteMap.saveData.maxLevels = celesteMap.saveData.maxLevels or {}
+celesteMap.saveData.finishedWorlds = {}
 
 celesteMap.saveData = SaveData.celesteMap
 
@@ -33,24 +34,32 @@ local levelName = Level.filename()
 local font =  textplus.loadFont("font.ini")
 
 function celesteMap.progress()
-	local currentWorld = celesteMap.saveData.openedWorlds - 1
+	local currentWorld = (celesteMap.saveData.world)
+	-- Misc.dialog(currentWorld)
+	
 	-- local maxWorlds = #celesteMap.saveData.openedLevels
 
 	local currentLevelCount = celesteMap.saveData.openedLevels
 	local maxLevels = celesteMap.saveData.maxLevels[currentWorld + 1]
 	
-	currentLevelCount[currentWorld + 1] = (currentLevelCount[currentWorld + 1] + 1)
-	if currentLevelCount[currentWorld + 1] > maxLevels then
+	if celesteMap.saveData.finishedWorlds[currentWorld] == nil then
+		currentLevelCount[currentWorld + 1] = (currentLevelCount[currentWorld + 1] + 1)
+	end
+	
+	-- Misc.dialog(currentLevelCount[currentWorld + 1], maxLevels)
+	
+	if currentLevelCount[currentWorld + 1] > maxLevels and not celesteMap.saveData.finishedWorlds[currentWorld] then
 		-- open new world
 		local newCurrentWorld = (celesteMap.saveData.openedWorlds + 1)
 		
 		celesteMap.saveData.openedWorlds = (celesteMap.saveData.openedWorlds + 1)
-		if celesteMap.saveData.openedWorlds >= #currentLevelCount then
-			celesteMap.saveData.openedWorlds = (#currentLevelCount - 1)
+		if celesteMap.saveData.openedWorlds > #currentLevelCount then
+			celesteMap.saveData.openedWorlds = (#currentLevelCount)
 		end
 		
 		-- level
 		currentLevelCount[currentWorld + 1] = (maxLevels)
+		celesteMap.saveData.finishedWorlds[currentWorld] = true
 	end
 end
 

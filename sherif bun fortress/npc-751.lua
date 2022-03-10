@@ -49,6 +49,13 @@ function npc.onTickNPC(v)
 	
 	if not startScroll then return end
 	
+	local bound = Section(player.section).boundary
+	
+	if v.y + v.height * 0.5 < bound.top then
+		v.data.hp = 0
+		v:kill(9)
+	end
+	
 	local p = player
 	
 	if p.keys.down then
@@ -81,6 +88,8 @@ function npc.onTickEndNPC(v)
 		local time = lunatime.tick() 
 		
 		if time % 10 == 0 then
+			SFX.play 'shoot.ogg'
+			
 			local bullet = NPC.spawn(13, v.x + 76, v.y + 20)
 			bullet.despawnTimer = 100
 			bullet.speedX = 16

@@ -30,6 +30,9 @@ local function darkness()
 end
 
 local function ct()
+	player.direction = 1
+	Pauser.disabled = true
+	
 	Routine.wait(1.5)
 	player.speedX = 1
 	

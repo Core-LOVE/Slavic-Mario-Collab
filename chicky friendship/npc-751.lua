@@ -25,7 +25,7 @@ npcManager.registerHarmTypes(id,
 {}
 )
 
-function npc.onNPCHarm(e, v, r, c)
+function npc.onNPCKill(e, v, r)
 	if v.id ~= id then return end
 	
 	if v.ai1 == 0 then
@@ -38,6 +38,11 @@ function npc.onNPCHarm(e, v, r, c)
 		v.speedX = 5.5 * v.direction
 	else
 		v.speedY = -6
+	end
+	
+	if r == 3 then
+		Effect.spawn(752, v.x, v.y)
+		return
 	end
 	
 	e.cancelled = true
@@ -105,8 +110,9 @@ function npc.onTickEndNPC(v)
 end
 
 function npc.onInitAPI()
+	npcManager.registerEvent(id, npc, 'onTickNPC')
 	npcManager.registerEvent(id, npc, 'onTickEndNPC')
-	registerEvent(npc, 'onNPCHarm')
+	registerEvent(npc, 'onNPCKill')
 end
 
 return npc

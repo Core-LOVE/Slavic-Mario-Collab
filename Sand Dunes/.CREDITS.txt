@@ -1,5 +1,5 @@
 Level made by me, LooKiCH (Lukinsky)
-For episode Russian Mario Collab
+For episode Slavic Mario Collab
 Used GFX & Scripts:
 • Desert GFX Pack by Xilore_Inaba: https://www.supermariobrosx.org/forums/viewtopic.php?t=16501
 • SMB1 Expanded GFX Pack by Sednauir: https://www.supermariobrosx.org/forums/viewtopic.php?f=31&t=4907
@@ -8,3 +8,4 @@ Used GFX & Scripts:
 • Mario Forever NPCs: https://www.supermariobrosx.org/forums/viewtopic.php?t=22341#p334550
 • SMAS SMB1 Mario Maker Enemies by SuperSledgeBro: https://mfgg.net/index.php?act=resdb&param=02&c=1&id=36328
 • Valtteri's GFX Pack: https://www.supermariobrosx.org/forums/viewtopic.php?t=1386
+• Rooms by MrDoubleA: https://www.supermariobrosx.org/forums/viewtopic.php?f=101&t=25260

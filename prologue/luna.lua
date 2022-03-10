@@ -1,4 +1,5 @@
 local function cs(c)
+	Pauser.disabled = true
 	local handycam = require 'handycam'
 
 	local cam = handycam[1]
@@ -69,12 +70,18 @@ local function cs(c)
 	him.direction = -1
 	
 	Routine.wait(1)
-	Defines.earthquake = 10
-	him.speedY = -24
-	him.direction = 1
+	Defines.earthquake = 8
+
+	SFX.play 'gone.ogg'
+	
+	for y = 0, him.height do
+		local e = Effect.spawn(265, him.x + math.random(him.width), him.y + y)
+		e.speedX = math.random(0, 2)
+		e.speedY = math.random(-1, 1)	
+	end
+	him:kill(9)
 	
 	Routine.wait(2)
-	him:kill(9)
 	cam:transition{
 		time = 1,
 		zoom = 1,
@@ -82,6 +89,7 @@ local function cs(c)
 		targets = {player},
 	}
 	c:stop(48)
+	Pauser.disabled = false
 	Graphics.activateHud(true)
 end
 
