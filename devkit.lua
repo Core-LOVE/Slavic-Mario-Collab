@@ -8,6 +8,8 @@ require(path .. 'death')
 require(path .. "hud")
 local ld = require('littleDialogue')
 ld.registerStyle("rmc",{
+    textColor = Color.black,
+
     typewriterEnabled = true,
     typewriterDelayNormal = 1, -- The usual delay between each character.
     typewriterDelayLong = 4,  -- The extended delay after any of the special delaying characters, listed below.
@@ -56,7 +58,10 @@ for k,v in ipairs(files) do
 		local path = Misc.resolveFile('lang/' .. v)
 		
 		local file = io.open(path)
-		loadstring(file:read("*a"))()
+		local code = loadstring(file:read("*a"))
+		code()
+		
+		assert(code, 'Found error in ' .. v)
 		
 		file:close()
 		

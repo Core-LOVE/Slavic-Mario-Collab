@@ -37,7 +37,6 @@ function require(path)
 	return oldRequire(path)
 end
 
-
 -- classexpender stuff
 function string.split(s, p, exclude, plain)
 	if  exclude == nil  then  exclude = false; end;

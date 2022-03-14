@@ -1,0 +1,4 @@
+lightradius = 64
+lightbrightness = 0.5
+lightcolor = blue
+lightflicker = false

@@ -48,4 +48,15 @@ translate('Other Optimizations', 'Другие оптимизации')
 
 translate('Choose language!', 'Выберите язык!')
 
+translate('World', 'Мир')
+translate('by', 'от')
+
+-- translate('Caucazeus', 'Кавказеус')
+-- translate('Asgarden', 'Асгарден')
+-- translate('Zahara', 'Захара')
+-- translate('Anterpole', 'Антерпол')
+-- translate('Blockade', 'Блокада')
+
+translate('Old Yoshi', 'Старый Йоши')
+
 LanguagesName[lang] = name

@@ -15,6 +15,14 @@ if langIsSet then
 	
 	local celesteMap = require 'celesteMap'
 
+	celesteMap.starCount = function()
+		return SaveData.cloversCount or 0
+	end
+	celesteMap.starIcon = Graphics.loadImageResolved 'devkit/clover.png'
+	
+	celesteMap.coinIcon = Graphics.loadImageResolved 'devkit/coin.png'
+	celesteMap.coinCount = true
+	
 	celesteMap.SFX = {
 		select = 'devkit/click.ogg',
 		choose = 'devkit/unpause.ogg',
@@ -33,7 +41,7 @@ if langIsSet then
 		},
 		
 		levels = {
-			{name = "Prologue", author = 'Core', fileName = 'prologue.lvlx'},	
+			{iconName = 'start.png', name = "Prologue", author = 'Core', fileName = 'prologue.lvlx'},	
 			{name = "Cobble Canyon", author = 'UndeFin', fileName = 'Cobble Canyon.lvlx'},
 			{name = "Deciduous Forest", author = 'Retro_games428', fileName = 'deciduous forest.lvlx'},
 			{name = "Chicky Friendship", author = 'Core', fileName = 'chicky friendship.lvlx'},
@@ -63,8 +71,8 @@ if langIsSet then
 		
 		levels = {
 			{name = "Celestial islands", author = 'Retro_games428', fileName = 'Celestial islands.lvlx'},
-			-- {name = "Highest Tower", author = 'SonOfAHorde', fileName = nil},
-			-- {name = " - ", author = 'h2643', fileName = nil},
+			{name = "Highest Tower", author = 'SonOfAHorde', fileName = nil},
+			{name = " - ", author = 'h2643', fileName = nil},
 			{name = "Majestic Melody", author = 'Core', fileName = 'majestic melody.lvlx'},
 			{name = "Gloomy Heights", author = 'Greenlight', fileName = 'Gloomy Heights.lvlx'},
 			{name = "Aurora Garden", author = 'UndeFin', fileName = 'Aurora Garden.lvlx'},
@@ -94,8 +102,9 @@ if langIsSet then
 			{name = "El Norado", author = 'Core', fileName = 'el norado.lvlx'},
 			{name = "The Purple", author = 'Doki', fileName = nil},
 			{name = "Sandy Scrapyard", author = 'Greenlight', fileName = nil},
-			{name = " - ", author = 'UndeFin', fileName = nil},
-			{iconName = "hotie.png", name = "Hotbi's Gasline Temple", author = 'Core', fileName = nil},
+			{name = "Twilight Around The Debris", author = 'UndeFin', fileName = nil},
+			{name = "Secrets of Egyptian Pyramid", author = 'SkullGamer205', fileName = nil},
+			{iconName = "hotie.png", name = "Hotbi's Gasline", author = 'Core', fileName = 'hotbi gasline.lvlx'},
 		}
 	}
 	
@@ -115,12 +124,43 @@ if langIsSet then
 		},
 		
 		levels = {
-			{name = "Prologue", author = 'Core', fileName = 'prologue.lvlx'},	
-			{name = "Cobble Canyon", author = 'UndeFin', fileName = 'Cobble Canyon.lvlx'},
-			{name = "Deciduous Forest", author = 'Retro_games428', fileName = 'deciduous forest.lvlx'},
-			{name = "Chicky Friendship", author = 'Core', fileName = 'chicky friendship.lvlx'},
-			{name = "Shapeshifter", author = 'Alex1479', fileName = 'shapeshifter.lvlx'},
-			{iconName = "boogie.png", name = "Boogie Boogie's Kitchen", author = 'Core', fileName = 'boogie boogie kitchen.lvlx'},
+			{name = " - ", author = 'George 7up', fileName = nil},
+			{name = " - ", author = '1230m 1', fileName = nil},
+			{name = "Duality", author = 'Core', fileName = 'duality.lvlx'},
+			{name = " - ", author = ' - ', fileName = nil},
+			{iconName = "belly.png", name = "Dancing Belly's Opera", author = 'Core', fileName = nil},
+		}
+	}
+	
+	celesteMap.addWorld{
+		name = "Blockade",
+		iconName = "blockade.png",
+		musicName = 'world5.ogg',
+		
+		ambient = Color.fromHexRGB(0xA5846F),
+		
+		bgName = 'blockadeBg.png',
+		
+		mesh = {
+			y = 420,
+			scale = 10,
+			
+			{path = 'world5.obj', material = {color = Color.fromHexRGB(0x606060)}},
+			{path = 'world5_1.obj', material = {color = Color.fromHexRGB(0xC0C0C0)}},
+			{path = 'world5_2.obj', material = {color = Color.fromHexRGB(0x00FFFF)}},
+		},
+		
+		levels = {
+			{name = " - ", author = ' - ', fileName = nil},	
+			{name = "Breaking News", author = 'Core', fileName = nil},
+			{name = "Mushroom Cafe", author = 'Core', fileName = nil},
+			{name = " - ", author = ' - ', fileName = nil},
+			{name = " - ", author = ' - ', fileName = nil},
+			{name = " - ", author = ' - ', fileName = nil},
+			{name = " - ", author = ' - ', fileName = nil},
+			{name = "Aerial Apotheosis", author = 'Greenlight', fileName = nil},
+			{iconName = "confident.png", name = "Confident Tanks", author = 'Core', fileName = nil},
+			{iconName = "last.png", name = "Epilogue", author = 'Core', fileName = nil},
 		}
 	}
 	

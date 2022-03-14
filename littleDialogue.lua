@@ -2,7 +2,8 @@
 
     littleDialogue.lua (v1.1)
     Written by MrDoubleA
-
+	MODIFIED BY CORE
+	
     Documentation: https://docs.google.com/document/d/1oJUQT6FvgtX7UA26r-JAWcG41Ns6lpe9iIP4qPEm6zw/edit?usp=sharing
 
     Yoshi's Island font ripped by Nemica (https://www.spriters-resource.com/snes/yoshiisland/sheet/19542/)
@@ -18,6 +19,10 @@ local handycam = require("handycam")
 
 local littleDialogue = {}
 
+littleDialogue.translation = {}
+littleDialogue.getLanguage = function()
+	return SaveData.language
+end
 
 local smallScreen
 pcall(function() smallScreen = require("smallScreen") end)
@@ -452,7 +457,18 @@ do
             box._newPortraitData = portraitData
             box.portraitVariation = (args[2] or 1) - 1
 
-            box._newSpeakerName = portraitData.speakerName or box._newSpeakerName
+			local speakerName = (portraitData.speakerName or box._newSpeakerName)
+			
+			do
+				local lang = littleDialogue.getLanguage()
+				local translation = littleDialogue.translation[lang]
+				
+				if translation and translation[speakerName] then
+					speakerName = translation[speakerName]
+				end
+			end
+	
+            box._newSpeakerName = speakerName
             setVoice(box,portraitData.voice)
         end
     end
@@ -651,11 +667,6 @@ end
 
 
 littleDialogue.BOX_STATE = STATE
-
-littleDialogue.translation = {}
-littleDialogue.getLanguage = function()
-	return SaveData.language
-end
 
 function littleDialogue.create(args)
     local box = setmetatable({},boxMT)
