@@ -1,0 +1,14 @@
+gfxoffsety=2
+gfxwidth=60
+gfxheight=52
+width=40
+height=52
+playerblocktop=1
+npcblocktop=1
+grabside=0
+grabtop=0
+speed=5
+noyoshi=1
+frames=1
+framestyle=0
+grid=8

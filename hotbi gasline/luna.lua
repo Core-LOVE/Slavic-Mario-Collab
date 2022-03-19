@@ -58,7 +58,48 @@ function onTickEnd()
 	end
 end
 
+local img = Graphics.loadImageResolved 'overlay.png'
+local s = Shader()
+s:compileFromFile(nil, Misc.resolveFile("source.frag"))
+
 function onCameraDraw()
+	if player.section == 3 then
+		for k,v in ipairs(BGO.get(21)) do
+			Graphics.drawBox{
+				texture = img,
+				
+				x = v.x,
+				y = v.y,
+				
+				shader = s,
+				uniforms = {
+					time = lunatime.tick() * 0.025,
+					intensity = 1,
+				},
+				
+				sceneCoords = true,
+			}
+			
+			Graphics.drawBox{
+				texture = img,
+				
+				x = v.x,
+				y = v.y,
+				
+				shader = s,
+				uniforms = {
+					time = lunatime.tick() * 0.01,
+					intensity = -1,
+				},
+				
+				sceneCoords = true,
+			}
+		end
+		
+		return
+	end
+	
+	
     lights:Draw()
 	
 	if player.section ~= 1 then return end
@@ -73,10 +114,8 @@ function onCameraDraw()
 end
 
 local function bossMeet()
-	Routine.wait(3.1)
-	
-	local n=  NPC.spawn(404, -158848 + 16, -160480)
-	Routine.wait(0.5)
+	local n=  NPC.spawn(404, -158848 + 16, -160480 + 16)
+	Routine.wait(3.6)
 	
 	Text.showMessageBox("<portrait hotbi>Yo dude!<page>You don't seem to be HOT, aren'tcha?<page>HOT BOYS don't steal stuff! Take that tip, dude!<page>You want to stay COLD? Let me teach ya how to be a HOT BOY!")
 	
@@ -87,7 +126,7 @@ local function bossMeet()
 	Audio.MusicPlay()
 	
 	n:kill(9)
-	NPC.spawn(753, -158848 + 16, -160480)
+	NPC.spawn(753, n.x, n.y)
 end
 
 function onEvent(n)

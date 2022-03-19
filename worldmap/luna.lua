@@ -72,7 +72,7 @@ if langIsSet then
 		levels = {
 			{name = "Celestial islands", author = 'Retro_games428', fileName = 'Celestial islands.lvlx'},
 			{name = "Highest Tower", author = 'SonOfAHorde', fileName = nil},
-			{name = " - ", author = 'h2643', fileName = nil},
+			{name = "Dental Debacle", author = 'h2643', fileName = 'Dental Debacle.lvlx'},
 			{name = "Majestic Melody", author = 'Core', fileName = 'majestic melody.lvlx'},
 			{name = "Gloomy Heights", author = 'Greenlight', fileName = 'Gloomy Heights.lvlx'},
 			{name = "Aurora Garden", author = 'UndeFin', fileName = 'Aurora Garden.lvlx'},
@@ -197,9 +197,9 @@ table.sort(langs, function(a,b)
 	return (a.index == 'usa')
 end)
 
-local currentLang = (SaveData.language == 'usa' and 0) or 1
+local currentLang = 0
 
-local y = 160
+local y = 100
 local cursor = Graphics.sprites.hardcoded['34-0'].img
 
 function onInputUpdate()
@@ -251,14 +251,24 @@ function onCameraDraw()
 	}
 	
 	local dy = 0
+	local dx = 0
+	local countW = 256
+	
+	for i = 0, currentLang do
+		if (i % 21) == 0 and i > 20 then
+			dx = dx - countW * 3
+		end
+	end
 	
 	for key = 1, #langs do
 		local lang = langs[key]
 		
+		if dx > countW * 3 then break end
+		
 		Graphics.drawBox{
 			texture = lang.img,
 			
-			x = 64,
+			x = 48 + dx,
 			y = y + dy,
 			width = 48,
 			height = 48,
@@ -266,28 +276,39 @@ function onCameraDraw()
 			color = (currentLang ~= (key - 1) and {0.5, 0.5, 0.5, 0.5}) or nil,
 		}
 		
+		local c
+		
 		if (key - 1) == currentLang then
+			c = Color.yellow
+			
 			Graphics.drawBox{
 				texture = cursor,
 				
-				x = 16,
+				x = 16 + dx,
 				y = y + dy + 8,
 				width = 32,
 				height = 32,
 			}
 		end
-		
+
 		textplus.print{
 			text = lang.name,
 			
-			x = 128,
+			x = 104 + dx,
 			y = y + dy,
 			
 			font = font,
 			xscale = 2,
 			yscale = 2,		
+			
+			color = c,
 		}
 		
 		dy = dy + 64
+		
+		if (key % 7) == 0 then
+			dx = dx + countW
+			dy = 0
+		end
 	end
 end

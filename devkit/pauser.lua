@@ -135,6 +135,7 @@ local settings = {
 				
 				x = x,
 				y = y - 6,
+				priority = 7,
 			}
 		end,
 	},
@@ -142,18 +143,7 @@ local settings = {
 	{
 		name = 'Disable Screenshake',
 		icon = function(x, y)
-			local state = (SaveData.disableShake and 1) or 0
-			local h = check.height * 0.5
-			
-			Graphics.drawBox{
-				texture = check,
-				
-				x = x,
-				y = y - 6,
-				
-				sourceY = h * state,
-				sourceHeight = h,
-			}
+			return (SaveData.disableShake and 1) or 0
 		end,
 		
 		action = function()
@@ -164,18 +154,7 @@ local settings = {
 	{
 		name = 'Darkness',
 		icon = function(x, y)
-			local state = (SaveData.optimizeDarkness and 1) or 0
-			local h = check.height * 0.5
-			
-			Graphics.drawBox{
-				texture = check,
-				
-				x = x,
-				y = y - 6,
-				
-				sourceY = h * state,
-				sourceHeight = h,
-			}
+			return (SaveData.optimizeDarkness and 1) or 0
 		end,
 					
 		action = function()
@@ -194,18 +173,7 @@ local settings = {
 	{
 		name = 'Weather',
 		icon = function(x, y)
-			local state = (SaveData.optimizeWeather and 1) or 0
-			local h = check.height * 0.5
-			
-			Graphics.drawBox{
-				texture = check,
-				
-				x = x,
-				y = y - 6,
-				
-				sourceY = h * state,
-				sourceHeight = h,
-			}
+			return (SaveData.optimizeWeather and 1) or 0
 		end,
 		
 		action = function()
@@ -230,18 +198,7 @@ local settings = {
 	{
 		name = 'Other Optimizations',
 		icon = function(x, y)
-			local state = (SaveData.optimizeOther and 1) or 0
-			local h = check.height * 0.5
-			
-			Graphics.drawBox{
-				texture = check,
-				
-				x = x,
-				y = y - 6,
-				
-				sourceY = h * state,
-				sourceHeight = h,
-			}
+			return (SaveData.optimizeOther and 1) or 0
 		end,
 		
 		action = function()
@@ -257,31 +214,29 @@ local settings = {
 options.cursor = 0
 options.name = "Menu"
 
-options[1] = {
+table.insert(options, {
 	name = 'Continue',
 	
 	action = function()
 		Audio.MusicVolume(64)
 		Misc.unpause()
 	end,
-}
-
-local count = 2
+})
 
 if Level.filename() ~= 'worldmap.lvlx' then
-	options[count] = {
+	table.insert(options, {
 		name = 'Restart',
 		
 		action = function()
 			Level.load(Level.filename())
+			Audio.MusicVolume(64)
+			
 			Misc.unpause()
 		end,
-	}
-	
-	count = count + 1
+	})
 end
 
-options[count] = {
+table.insert(options, {
 	name = 'Settings',
 	
 	action = function()
@@ -290,10 +245,9 @@ options[count] = {
 		options = settings
 		options.parent = parent
 	end,
-}
-count = count + 1
+})
 
-options[count] = {
+table.insert(options, {
 	name = 'Exit',
 	
 	action = function()
@@ -310,11 +264,12 @@ options[count] = {
 			SFX.play 'devkit/unpause.ogg'
 			
 			Misc.unpause()	
-		
+			Audio.MusicVolume(64)
+			
 			Level.load('worldmap.lvlx')
 		end
 	end,
-}
+})
 
 -- local translation = {}
 
@@ -423,6 +378,7 @@ function pause.onDraw()
 	
 	Graphics.drawScreen{
 		color = Color.black .. 0.5,
+		priority = 7,
 	}
 	
 	local lang = SaveData.language
@@ -443,6 +399,7 @@ function pause.onDraw()
 			width = 800,
 			height = (#options * count) + count * 0.5,
 			
+			priority = 7,
 			color = {0,0,0,0.5},
 		}
 		
@@ -455,6 +412,8 @@ function pause.onDraw()
 			
 			xscale = 3,
 			yscale = 3,	
+			
+			priority = 7,
 		}
 	end
 	
@@ -471,6 +430,7 @@ function pause.onDraw()
 			width = 800,
 			height = 28,
 			
+			priority = 7,
 			color = {0,0,0,1},
 		}
 		
@@ -482,6 +442,7 @@ function pause.onDraw()
 			Graphics.drawBox{
 				texture = cursor,
 				
+				priority = 7,
 				x = 16,
 				y = (300 + dy),
 			}
@@ -496,11 +457,28 @@ function pause.onDraw()
 			xscale = 2,
 			yscale = 2,
 			
+			priority = 7,	
 			color = col,
 		}
 		
-		if type(option.icon) == 'function' then
-			option.icon(800 - 64, 300 + dy)
+		if type(option.icon) == 'boolean' then
+
+		elseif type(option.icon) == 'function' then
+			local state = option.icon(800 - 64, 300 + dy)
+			local h = check.height * 0.5
+			
+			if state then
+				Graphics.drawBox{
+					texture = check,
+					
+					x = 800 - 64,
+					y = 300 + dy,
+					
+					sourceY = h * state,
+					sourceHeight = h,
+					priority = 7,
+				}
+			end
 		else
 			if option.icon ~= nil then
 

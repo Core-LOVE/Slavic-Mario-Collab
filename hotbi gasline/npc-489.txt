@@ -1,0 +1,9 @@
+frames=1
+framestyle=0
+width=62
+height=64
+gfxwidth=62
+gfxheight=64
+gfxheight=64
+nogravity = true
+noblockcollision=true

@@ -452,6 +452,8 @@ local function toggleMeshes(world)
 end
 
 local function changeWorld(f)
+	if celesteMap.saveData.openedWorlds <= 1 then return end
+	
 	SFX.play 'devkit/transition.wav'
 	
 	transitioning = true
@@ -486,7 +488,7 @@ function celesteMap.onInputUpdate()
 	local jump = rawKeys.jump
 	
 	local worldCount = celesteMap.saveData.openedWorlds
-	
+
 	if worldCount > #celesteMap.worlds then
 		worldCount = #celesteMap.worlds
 	end
