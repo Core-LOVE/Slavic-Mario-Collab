@@ -42,9 +42,16 @@ translate('Settings', 'Настройки')
 translate('Return', 'Вернуться')
 translate('Change Language', 'Сменить Язык')
 translate('Disable Screenshake', 'Отключить тряску камеры')
+translate("HUD's Opacity", 'Прозрачность Худа')
+translate('HUD Offset', 'Смещение Худа')
+
+translate('Optimizations', 'Оптимизация')
 translate('Darkness', 'Темнота')
-translate('Weather', 'Эффекты')
-translate('Other Optimizations', 'Другие оптимизации')
+translate('Weather', 'Погода')
+translate('Screen Effects', 'Эффекты')
+translate('Other...', 'Другие оптимизации...')
+
+translate('Assist Mode', 'Вспомогательный Режим')
 
 translate('Choose language!', 'Выберите язык!')
 

@@ -1,0 +1,5 @@
+width=160
+gfxwidth=160
+gfxheight=32
+nogravity=true
+grabside=false

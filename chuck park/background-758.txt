@@ -1,0 +1,5 @@
+[background]
+name = "White Bishop"
+image = "background-758.png"
+grid = 8
+priority = -39

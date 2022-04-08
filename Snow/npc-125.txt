@@ -1,0 +1,9 @@
+height=32
+width=32
+gfxheight=64
+gfxwidth=32
+gfxoffsety=0
+foreground=1
+playerblocktop=1
+npcblocktop=1
+speed=2

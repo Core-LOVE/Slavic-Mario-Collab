@@ -1,0 +1,13 @@
+gfxoffsety=2
+gfxwidth=96
+gfxheight=32
+foreground=1
+width=96
+height=32
+playerblock=0
+playerblocktop=0
+npcblock=0
+npcblocktop=0
+grabside=0
+grabtop=0
+nogravity=1

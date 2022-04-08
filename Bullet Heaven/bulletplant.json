@@ -1,0 +1,14 @@
+{
+	"style" : "groupbox",
+	"title" : "Rotating Bill Blaster Settings",
+	"layout": [
+		{
+			"control": "itemSelect",
+			"name": "projectile",
+			"title": "Projectile",
+			"type": "npcorcoins",
+			"tooltip": "Which NPC to fire from the blaster (use none to fire regular Bullet Bills).",
+			"value-default": 0
+		}
+	]
+}

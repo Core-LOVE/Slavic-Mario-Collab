@@ -1,0 +1,1 @@
+Details.set('desert')

@@ -45,6 +45,7 @@ if langIsSet then
 			{name = "Cobble Canyon", author = 'UndeFin', fileName = 'Cobble Canyon.lvlx'},
 			{name = "Deciduous Forest", author = 'Retro_games428', fileName = 'deciduous forest.lvlx'},
 			{name = "Chicky Friendship", author = 'Core', fileName = 'chicky friendship.lvlx'},
+			{name = "Bullet Heaven", author = '1230m 1', fileName = 'Bullet Heaven.lvlx'},
 			{name = "Shapeshifter", author = 'Alex1479', fileName = 'shapeshifter.lvlx'},
 			{iconName = "boogie.png", name = "Boogie Boogie's Kitchen", author = 'Core', fileName = 'boogie boogie kitchen.lvlx'},
 		}

@@ -1,4 +1,5 @@
 local hud = {}
+hud.offset = SaveData.hudOffset or 24
 
 local bosses = {}
 
@@ -20,16 +21,18 @@ local starcoin
 local coinAdd = {}
 
 local function renderCoins(priority)
-	Graphics.drawBox{texture = hud1, x = 32, y = 32, priority = priority}
-	Graphics.drawBox{texture = coin, x = 32 + 8, y = 32 + 8, priority = priority}	
+	local offset = hud.offset
+	
+	Graphics.drawBox{texture = hud1, x = offset, y = offset, priority = priority}
+	Graphics.drawBox{texture = coin, x = offset + 8, y = offset + 8, priority = priority}	
 	
 	local count = mem(0x00B2C5A8, FIELD_WORD)
 	
 	textplus.print{
 		text = "x " .. count,
 		
-		x = 32 + 32,
-		y = 32 + 8,
+		x = offset + 32,
+		y = offset + 8,
 		
 		font = font,
 		xscale = 2,
@@ -39,7 +42,9 @@ local function renderCoins(priority)
 end
 
 local function renderScore(priority)
-	Graphics.drawBox{texture = hud2, x = 800 - hud2.width - 32, y = 32, priority = priority}
+	local offset = hud.offset
+	
+	Graphics.drawBox{texture = hud2, x = 800 - hud2.width - offset, y = offset, priority = priority}
 	
 	local count = SaveData._basegame.hud.score
 	count = string.format("%08d", count)
@@ -47,8 +52,8 @@ local function renderScore(priority)
 	textplus.print{
 		text = count,
 		
-		x = 800 - hud2.width - 64,
-		y = 32 + 8,
+		x = 800 - hud2.width - (offset + 32),
+		y = offset + 8,
 		
 		xscale = 2,
 		yscale = 2,
@@ -59,7 +64,9 @@ local function renderScore(priority)
 end
 
 local function renderItembox(idx, priority)
-	Graphics.drawBox{texture = itembox, x = 400 - 26, y = 32, priority = priority}
+	local offset = hud.offset
+	
+	Graphics.drawBox{texture = itembox, x = 400 - 26, y = offset, priority = priority}
 	
 	local p = Player(idx)
 	
@@ -69,7 +76,7 @@ local function renderItembox(idx, priority)
 				texture = Graphics.sprites.npc[p.reservePowerup].img, 
 				
 				x = (400 - 26) + (56 - 32) / 2, 
-				y = 32 + (56 - 32) / 2, 
+				y = offset + (56 - 32) / 2, 
 				sourceWidth = 32,
 				sourceHeight = 32,
 				
@@ -80,16 +87,18 @@ local function renderItembox(idx, priority)
 end
 
 local function renderClovers(priority)
-	Graphics.drawBox{texture = hud3, x = 32, y = 64, priority = priority}
-	Graphics.drawBox{texture = clover, x = 32 + 4, y = 64 + 2, priority = priority}
+	local offset = hud.offset
+	
+	Graphics.drawBox{texture = hud3, x = offset, y = offset + 32, priority = priority}
+	Graphics.drawBox{texture = clover, x = offset + 4, y = offset + 34, priority = priority}
 	
 	local count = SaveData.cloversCount or 0
 	
 	textplus.print{
 		text = "x " .. count,
 		
-		x = 32 + 32,
-		y = 64 + 8,
+		x = offset + 32,
+		y = offset + 40,
 		
 		font = font,
 		xscale = 2,
@@ -99,10 +108,12 @@ local function renderClovers(priority)
 end
 
 local function renderHearts(priority)
+	local offset = hud.offset
+	
 	local count = player.Hearts
 	
 	local x = (400 - 26)
-	local y = 48
+	local y = (offset + 16)
 	
 	local dx = -24
 	
@@ -192,8 +203,9 @@ local function renderStarcoins(priority)
 	
 	if not t then return end
 	
-	local x = 32
-	local y = 96
+	local offset = hud.offset
+	local x = offset
+	local y = offset + 64
 		
 	for i = 1, t.maxID do
 		local col = {0.5, 0.5, 0.5, 0.5}
@@ -215,7 +227,7 @@ local function renderStarcoins(priority)
 		
 		if i % 5 == 0 then
 			y = y + starcoinImg.height + 2
-			x = 32
+			x = offset
 		end
 	end
 end
@@ -284,11 +296,11 @@ Graphics.overrideHUD(function(idx, priority, isSplit)
 	end
 end)
 
-local x = ((400 - 26) + (56 - 32) / 2)
-local y = (32 + (56 - 32) / 2)
-
 function hud.onInputUpdate()
 	if player.keys.dropItem == KEYS_PRESSED and player.reservePowerup > 0 then
+		local x = ((400 - 26) + (56 - 32) / 2)
+		local y = (hud.offset + (56 - 32) / 2)
+		
 		SFX.play(11)
 		
 		local dropNpc = NPC.spawn(player.reservePowerup, x + camera.x, y + camera.y)

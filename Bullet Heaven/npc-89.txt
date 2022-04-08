@@ -1,0 +1,5 @@
+frames=4
+width=30
+height=34
+cliffturn=1
+framestyle=1

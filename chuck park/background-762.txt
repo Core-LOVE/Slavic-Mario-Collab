@@ -1,0 +1,5 @@
+[background]
+name = "White King"
+image = "background-762.png"
+grid = 8
+priority = -39

@@ -1,11 +1,12 @@
 local path = "devkit/"
+_G.PowerDown = require(path .. 'powerdown')
 _G.warpTransition = require(path .. 'warpTransition')
-
+_G.Details = require(path .. 'details')
 --Save stuff
 SaveData.language = SaveData.language or 'usa'
 
 require(path .. 'death')
-require(path .. "hud")
+_G.HUDER = require(path .. "hud")
 local ld = require('littleDialogue')
 ld.registerStyle("rmc",{
     textColor = Color.black,
@@ -79,8 +80,14 @@ local devkit = {}
 function devkit.onExitLevel(win)
 	if win <= 0 then return end
 	
-	local celesteMap = require('worldmap/celesteMap')
-	celesteMap.progress()
+	local status = pcall(function() 
+		require('worldmap/celesteMap')
+	end)
+	
+	if status then
+		local celesteMap = require('worldmap/celesteMap')
+		celesteMap.progress()
+	end
 end
 
 function devkit.onInitAPI()

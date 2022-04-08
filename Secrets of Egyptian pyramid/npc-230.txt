@@ -1,0 +1,8 @@
+width=66
+gfxwidth=66
+height=72
+gfxheight=72
+foreground=0
+noyoshi=1
+nofireball=1
+jumphurt=1

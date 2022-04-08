@@ -33,10 +33,16 @@ celesteMap.light = lib3d.Light({rotation = vector.quaternion(-45, 45, 0)})
 local levelName = Level.filename()
 
 local font =  textplus.loadFont("font.ini")
-local nextCursor = Graphics.loadImageResolved 'next.png'
+local nextCursor = Misc.resolveFile('next.png')
+
+if nextCursor then
+	nextCursor = Graphics.loadImage(nextCursor)
+end
 
 function celesteMap.progress()
 	local currentWorld = (celesteMap.saveData.world)
+	
+	if not currentWorld then return end
 	-- Misc.dialog(currentWorld)
 	
 	-- local maxWorlds = #celesteMap.saveData.openedLevels

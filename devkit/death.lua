@@ -1,7 +1,5 @@
 local death = {}
 
-local deathTexture = Graphics.loadImageResolved('devkit/death.png')
-
 local priority = 5.5
 local buffer = Graphics.CaptureBuffer(800,600)
 local irisOutShader

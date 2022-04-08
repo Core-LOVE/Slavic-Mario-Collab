@@ -25,7 +25,7 @@ npcManager.registerHarmTypes(id,
 {}
 )
 
-function npc.onNPCKill(e, v, r)
+function npc.onNPCHarm(e, v, r, c)
 	if v.id ~= id then return end
 	
 	if v.ai1 == 0 then
@@ -40,9 +40,11 @@ function npc.onNPCKill(e, v, r)
 		v.speedY = -6
 	end
 	
-	if r == 3 then
+	if r == 3 and c and c.id ~= 13 then
 		Effect.spawn(752, v.x, v.y)
 		return
+	else
+		Effect.spawn(751, v.x, v.y)
 	end
 	
 	e.cancelled = true
@@ -74,6 +76,7 @@ function npc.onTickEndNPC(v)
 			v.speedX = 5.5 * v.direction
 			
 			Effect.spawn(751, v.x, v.y)
+			SFX.play 'flap.ogg'
 			
 			data.circle = nil
 
@@ -112,7 +115,7 @@ end
 function npc.onInitAPI()
 	npcManager.registerEvent(id, npc, 'onTickNPC')
 	npcManager.registerEvent(id, npc, 'onTickEndNPC')
-	registerEvent(npc, 'onNPCKill')
+	registerEvent(npc, 'onNPCHarm')
 end
 
 return npc

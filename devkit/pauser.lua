@@ -1,15 +1,20 @@
-local pauseDebug = false
+local pauseDebug = Misc.inEditor()
+
+local textplus = require 'textplus'
+local font =  textplus.loadFont("devkit/font.ini")
 
 local pause = {}
 pause.disabled = false
 
 SaveData.disableShake = SaveData.disableShake or false
 
+SaveData.optimizeEffect = SaveData.optimizeEffect or false
 SaveData.optimizeWeather = SaveData.optimizeWeather or false
 SaveData.optimizeOther = SaveData.optimizeOther or false
 SaveData.optimizeDarkness = SaveData.optimizeDarkness or false
 
 local initDark = {}
+local initEffect = {}
 local initWeather = {}
 
 function pause.onTick()
@@ -34,6 +39,20 @@ function pause.onStart()
 	end
 	
 	for k,v in ipairs(Section.get()) do
+		if SaveData.optimizeEffect then
+			local effects = v.effects
+			local weather = effects.screenEffect
+			
+			if initEffect[v.idx] == nil and weather ~= 0 then
+				initEffect[v.idx] = weather
+				
+				effects.screenEffect = 0
+			else
+				effects.screenEffect = initEffect[v.idx]
+				initEffect[v.idx] = nil
+			end
+		end
+		
 		if SaveData.optimizeDarkness then
 			local dark = v.darkness
 			
@@ -151,10 +170,80 @@ local settings = {
 		end,
 	},
 	
+	-- {
+		-- name = "HUD's Opacity",
+		-- icon = function(x, y)
+			-- textplus.print{
+				-- text = HUDER.offset .. '/' .. 255,
+				
+				-- x = x - 32,
+				-- y = y,
+				
+				-- font = font,
+				-- xscale = 2,
+				-- yscale = 2,
+				-- priority = 7.5,
+			-- }
+		-- end,
+		
+		-- action = function()
+			-- HUDER.offset = HUDER.offset + 8
+			
+			-- if HUDER.offset > 64 then
+				-- HUDER.offset = 8
+			-- end
+			
+			-- SaveData.hudOffset = HUDER.offset
+		-- end,
+	-- },
+	
+	{
+		name = 'HUD Offset',
+		icon = function(x, y)
+			textplus.print{
+				text = HUDER.offset .. '/' .. 64,
+				
+				x = x - 32,
+				y = y,
+				
+				font = font,
+				xscale = 2,
+				yscale = 2,
+				priority = 7.5,
+			}
+		end,
+		
+		action = function()
+			HUDER.offset = HUDER.offset + 8
+			
+			if HUDER.offset > 64 then
+				HUDER.offset = 8
+			end
+			
+			SaveData.hudOffset = HUDER.offset
+		end,
+	},
+}
+
+local optimization = {
+	name = 'Optimizations',
+	cursor = 0,
+	
+	{
+		name = 'Return',
+		
+		action = function()
+			local parent = options.parent
+			
+			options = parent
+			options.parent = nil
+		end,
+	},
+	
 	{
 		name = 'Darkness',
 		icon = function(x, y)
-			return (SaveData.optimizeDarkness and 1) or 0
+			return (SaveData.optimizeDarkness and 0) or 1
 		end,
 					
 		action = function()
@@ -173,7 +262,7 @@ local settings = {
 	{
 		name = 'Weather',
 		icon = function(x, y)
-			return (SaveData.optimizeWeather and 1) or 0
+			return (SaveData.optimizeWeather and 0) or 1
 		end,
 		
 		action = function()
@@ -196,7 +285,32 @@ local settings = {
 	},
 	
 	{
-		name = 'Other Optimizations',
+		name = 'Screen Effects',
+		icon = function(x, y)
+			return (SaveData.optimizeEffect and 0) or 1
+		end,
+		
+		action = function()
+			for k,v in ipairs(Section.get()) do
+				SaveData.optimizeEffect = not SaveData.optimizeEffect
+				
+				local effects = v.effects
+				local weather = effects.screenEffect
+				
+				if initEffect[v.idx] == nil and weather ~= 0 then
+					initEffect[v.idx] = weather
+					
+					effects.screenEffect = 0
+				else
+					effects.screenEffect = initEffect[v.idx]
+					initEffect[v.idx] = nil
+				end
+			end
+		end,
+	},
+	
+	{
+		name = 'Other...',
 		icon = function(x, y)
 			return (SaveData.optimizeOther and 1) or 0
 		end,
@@ -208,6 +322,67 @@ local settings = {
 				onOptimize(SaveData.optimizeOther)
 			end
 		end
+	},
+}
+
+local assist = {
+	name = 'Assist Mode',
+	cursor = 0,
+	desc = "<color red>Warning</color>: Using any of these settings will enable <color lightblue>Assist Mode</color> on\nthis save <color red>PERMANENTLY</color>!",
+	
+	{
+		name = 'Return',
+		
+		action = function()
+			local parent = options.parent
+			
+			options = parent
+			options.parent = nil
+		end,
+	},
+	
+	{
+		name = 'No Pit Deaths',
+		
+		action = function()
+			local parent = options.parent
+			
+			options = parent
+			options.parent = nil
+		end,
+	},
+	
+	{
+		name = 'Game Speed',
+		
+		action = function()
+			local parent = options.parent
+			
+			options = parent
+			options.parent = nil
+		end,
+	},
+	
+	{
+		name = 'Invincibility',
+		
+		action = function()
+			local parent = options.parent
+			
+			options = parent
+			options.parent = nil
+		end,
+	},
+	
+	{
+		name = 'Double Jumps',
+		
+		action = function()
+			local parent = options.parent
+			
+			options = parent
+			options.parent = nil
+		end,
 	},
 }
 
@@ -244,6 +419,40 @@ table.insert(options, {
 		
 		options = settings
 		options.parent = parent
+	end,
+})
+
+table.insert(options, {
+	name = 'Optimizations',
+	
+	action = function()
+		local parent = options
+		
+		options = optimization
+		options.parent = parent
+	end,
+})
+
+local assistImg = Graphics.loadImageResolved 'devkit/assist.png'
+
+table.insert(options, {
+	name = 'Assist Mode',
+	
+	action = function()
+		local parent = options
+		
+		options = assist
+		options.parent = parent
+	end,
+	
+	icon = function(x, y)
+		Graphics.drawBox{
+			texture = assistImg,
+			
+			x = 34,
+			y = y - 6,
+			priority = 7,
+		}
 	end,
 })
 
@@ -352,9 +561,6 @@ function pause.onInputUpdate()
 		end
 	end
 end
-
-local textplus = require 'textplus'
-local font =  textplus.loadFont("devkit/font.ini")
 
 local cursor = Graphics.sprites.hardcoded['34-0'].img
 
@@ -486,6 +692,40 @@ function pause.onDraw()
 		end
 		
 		dy = dy + count
+	end
+	
+	dy = dy + 16
+	
+	do
+		local name = options.desc
+		
+		if name then
+			if lang ~= 'usa' and littleDialogue.translation[lang] and littleDialogue.translation[lang][name] then
+				name = littleDialogue.translation[lang][name]
+			end
+			
+			Graphics.drawBox{
+				x = 0,
+				y = 300 + dy,
+				width = 800,
+				height = 400,
+				
+				color = Color.black .. 0.5,
+			}
+			
+			textplus.print{
+				text = name,
+				
+				x = 8,
+				y = (300 + dy) + 8,
+				
+				xscale = 1.5,
+				yscale = 1.5,
+				
+				font = font,
+				priority = 7,
+			}
+		end
 	end
 end
 

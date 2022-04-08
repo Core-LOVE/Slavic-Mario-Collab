@@ -1,0 +1,7 @@
+frames=1
+height=50
+width=64
+gfxheight=64
+gfxwidth=64
+playerblock=1
+jumphurt=0

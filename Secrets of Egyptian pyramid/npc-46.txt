@@ -1,0 +1,6 @@
+gfxwidth=64
+gfxheight=128
+width=64
+height=64
+gfxoffsety=64
+foreground=0

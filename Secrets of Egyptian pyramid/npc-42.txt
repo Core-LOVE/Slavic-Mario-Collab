@@ -1,0 +1,3 @@
+playerblocktop=1
+npcblocktop=1
+speed=2

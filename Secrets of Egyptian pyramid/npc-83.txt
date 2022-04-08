@@ -1,0 +1,9 @@
+playerblock=1
+playerblocktop=1
+npcblock=0
+npcblocktop=0
+nogravity=1
+foreground=1
+gfxheight=34
+height=34
+gfxoffsety=2

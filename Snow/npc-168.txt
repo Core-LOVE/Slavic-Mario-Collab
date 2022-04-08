@@ -1,0 +1,9 @@
+width=52
+height=54
+gfxwidth=52
+gfxheight=54
+frames=2
+framestyle=1
+framespeed=2
+score=5
+noyoshi=1

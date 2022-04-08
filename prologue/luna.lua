@@ -109,3 +109,11 @@ function onEvent(name)
 		Routine.run(cs, c)
 	end
 end
+
+function onPostPlayerKill(v)
+	for k,n in NPC.iterateIntersecting(v.x, v.y, v.x + v.width, v.y + v.height) do
+		if n.id == 1 then
+			triggerEvent("evilGoomba")
+		end
+	end
+end
