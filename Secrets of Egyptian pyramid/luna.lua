@@ -1,1 +1,3 @@
-Details.set('desert')
+function onStart()
+	player.character = CHARACTER_TOAD
+end

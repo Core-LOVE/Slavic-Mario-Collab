@@ -1,0 +1,6 @@
+gfxwidth=64
+gfxheight=32
+width=60
+height=32
+cliffturn=1
+noiceball=1

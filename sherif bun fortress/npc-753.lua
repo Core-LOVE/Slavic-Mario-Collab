@@ -21,6 +21,7 @@ npcManager.setNpcSettings{
 	gfxheight=64,
 	
 	noiceball = true,
+	noyoshi = true,
 }
 
 local harmTypes = {

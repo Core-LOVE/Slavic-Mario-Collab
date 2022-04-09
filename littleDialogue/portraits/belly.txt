@@ -1,0 +1,4 @@
+idleFrames=1
+variations=2
+voice="belly"
+speakerName="Dancing Belly"

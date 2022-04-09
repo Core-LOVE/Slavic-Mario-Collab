@@ -14,6 +14,9 @@ npcManager.setNpcSettings{
 	nohurt = true,
 	jumphurt = true,
 	
+	noyoshi = true,
+	noiceball = true,
+	
 	nogravity = true,
 }
 

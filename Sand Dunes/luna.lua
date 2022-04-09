@@ -1,14 +1,16 @@
-local rng = loadSharedAPI("base/rng");
+local rng = RNG
 local rooms = require("rooms");
 local roomstable = table.map{6}
 local darkness = require("darkness")
+
 local DarknessField = darkness.create 
 	{
 	section = 0,
  	ambient = Color.fromHexRGB(0x444444),
 	shadows = darkness.shadow.HARD_RAYMARCH
 	}
-local sandstorm = Particles.Emitter(0,0, Misc.resolveFile("particles/p_sandstorm.ini"))
+	
+local sandstorm = Particles.Emitter(0,0, "p_sandstorm.ini")
 sandstorm:AttachToCamera(camera)
 
 function onDraw()
@@ -19,8 +21,18 @@ function onDraw()
 	end
 end
 
-function onLoop()
-	for j,w in pairs(NPC.get(245,player.section)) do
+local pipeAPI = require("tweaks/pipecannon")
+
+-- You can set exit speeds for every warp
+pipeAPI.exitspeed = {0,20,0,0}
+-- Will ignore speeds set for doors/instant warps
+-- Sound effect for firing
+pipeAPI.SFX = 22 -- default value (bullet bill sfx), set to 0 for silent
+-- Visual effect for firing
+pipeAPI.effect = 10 -- set to 0 for none
+
+function onTick()
+	for j,w in NPC.iterate(245,player.section) do
 		if w.ai2 == 2 and w.ai1 == 49 then
             w.ai3 = 0
 			sdeterm = rng.randomInt(1,2)
@@ -52,19 +64,7 @@ function onLoop()
 			end
         end
     end
-end
-
-local pipeAPI = require("tweaks/pipecannon")
-
--- You can set exit speeds for every warp
-pipeAPI.exitspeed = {0,20,0,0}
--- Will ignore speeds set for doors/instant warps
--- Sound effect for firing
-pipeAPI.SFX = 22 -- default value (bullet bill sfx), set to 0 for silent
--- Visual effect for firing
-pipeAPI.effect = 10 -- set to 0 for none
-
-function onTick()
+	
 	if roomstable[rooms.currentRoomIndex] then
         DarknessField.section = 0
 		if not player.hasStarman then

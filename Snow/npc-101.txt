@@ -1,2 +1,0 @@
-width=84
-height=140

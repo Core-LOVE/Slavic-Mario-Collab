@@ -169,12 +169,15 @@ if langIsSet then
 end
 
 Pauser.disabled = true
+
 local textplus = require 'textplus'
-local font =  textplus.loadFont("devkit/font.ini")
+local font =  textplus.loadFont("font.ini")
 
 function onStart()
 	player.forcedState = 8
 	SFX.play(47)
+	
+	SaveData.language = 'usa'
 end
 
 -- local text = {

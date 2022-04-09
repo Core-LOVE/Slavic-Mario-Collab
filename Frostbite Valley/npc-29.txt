@@ -1,0 +1,5 @@
+gfxwidth=64
+gfxheight=66
+width=64
+height=66
+noiceball=1

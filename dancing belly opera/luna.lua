@@ -10,6 +10,14 @@ local function noBlock(x, y)
 	return true
 end
 
+local function cutscene1()
+	littleDialogue.create{text = "<portrait belly>...And our special guest is Mario!"}
+	Routine.wait(1)
+	littleDialogue.create{text = "<portrait belly>Welcome to my great show! Want to know what we're doing?<page>We must save Princess and world from EVIL GUY!<page>Oh, and we're not talking about Bowser and Peach!"}
+	Routine.wait(0.5)
+	littleDialogue.create{text = "<portrait belly 2>We meant YOU and ME."}
+end
+
 function onStart()
 	local cellSize = 32
 	
@@ -58,5 +66,11 @@ lights:AttachToCamera(camera)
 
 function onCameraDraw()
 	lights:Draw()
+end
+
+function onEvent(name)
+	if name == "cutscene" then
+		Routine.run(cutscene1)
+	end
 end
 

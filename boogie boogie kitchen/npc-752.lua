@@ -17,6 +17,9 @@ npcManager.setNpcSettings{
 	nogravity = true,
 	noblockcollision = true,
 	
+	noiceball = true,
+	noyoshi = true,
+	
 	frames = 1,
 }
 

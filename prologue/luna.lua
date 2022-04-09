@@ -1,4 +1,12 @@
+function onStart()
+	triggerEvent('moving1')
+end
+
 local function cs(c)
+	for k,n in NPC.iterate(246) do
+		n:kill(9)
+	end
+	
 	Pauser.disabled = true
 	local handycam = require 'handycam'
 

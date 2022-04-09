@@ -13,6 +13,9 @@ npcManager.setNpcSettings{
 	
 	frames = 1,
 
+	jumphurt = true,
+	nohurt = false,
+	
 	nogravity = true,
 	noblockcollision = true,
 }
