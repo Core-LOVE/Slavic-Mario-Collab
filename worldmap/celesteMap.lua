@@ -32,7 +32,7 @@ celesteMap.light = lib3d.Light({rotation = vector.quaternion(-45, 45, 0)})
 
 local levelName = Level.filename()
 
-local font =  textplus.loadFont("font.ini")
+local font =  textplus.loadFont("devkit/font.ini")
 local nextCursor = Misc.resolveFile('next.png')
 
 if nextCursor then

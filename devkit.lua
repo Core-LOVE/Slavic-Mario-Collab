@@ -7,7 +7,8 @@ SaveData.language = SaveData.language or 'usa'
 
 require(path .. 'death')
 _G.HUDER = require(path .. "hud")
-local ld = require('littleDialogue')
+local ld = require(path .. 'littleDialogue')
+
 ld.registerStyle("rmc",{
     textColor = Color.black,
 

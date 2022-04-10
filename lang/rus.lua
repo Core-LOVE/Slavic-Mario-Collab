@@ -1,4 +1,4 @@
-local littleDialogue = require('littleDialogue')
+local littleDialogue = _G.littleDialogue
 
 local lang = 'rus'
 local name = 'Русский'

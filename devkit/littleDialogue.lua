@@ -217,12 +217,13 @@ do
             return folderPath
         end
 
-        local mainPath = "littleDialogue/".. fontFileName
-        if Misc.resolveFile(mainPath) ~= nil then
-            return mainPath
-        end
+        -- local mainPath = "devkit/dialogue.ini"
+		
+        -- if Misc.resolveFile(mainPath) ~= nil then
+            -- return mainPath
+        -- end
 
-        return nil
+        -- return nil
     end
 
     local function compileShader(styleName,vertName,fragName)
@@ -274,7 +275,7 @@ do
         self.typewriterFinished = (not self.settings.typewriterEnabled)
         self.priority = self.settings.priority
     end
-
+	
     function littleDialogue.registerStyle(name,settings)
         if settingsList == nil then
             settingsList = table.append(table.unmap(littleDialogue.defaultBoxSettings),extraSettingsList)
@@ -297,7 +298,20 @@ do
 
         settings.typewriterSound = SFX.open(Misc.resolveSoundFile("littleDialogue/".. name.. "/typewriter") or Misc.resolveSoundFile("littleDialogue/typewriter"))
 
-        settings.font = settings.font or textplus.loadFont(findFont(name,"font.ini"))
+		if not settings.font then
+			local result = findFont(name,"font.ini")
+			
+			if result then
+				settings.font = textplus.loadFont(result)
+			else
+				local font = textplus.loadFont('devkit/font.ini')
+				font.image = Graphics.loadImageResolved 'devkit/font/dialogue.png'
+				
+				settings.font = font
+			end
+		end
+		
+        -- settings.font = settings.font or textplus.loadFont(findFont(name,"font.ini"))
 
         if settings.speakerNameFont == nil then
             local speakerNameFont = findFont(name,"speakerNameFont.ini")
