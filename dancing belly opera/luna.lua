@@ -11,11 +11,12 @@ local function noBlock(x, y)
 end
 
 local function cutscene1()
-	littleDialogue.create{text = "<portrait belly>...And our special guest is Mario!"}
-	Routine.wait(1)
-	littleDialogue.create{text = "<portrait belly>Welcome to my great show! Want to know what we're doing?<page>We must save Princess and world from EVIL GUY!<page>Oh, and we're not talking about Bowser and Peach!"}
-	Routine.wait(0.5)
-	littleDialogue.create{text = "<portrait belly 2>We meant YOU and ME."}
+	-- littleDialogue.create{text = "<portrait belly>...And our special guest is Mario!"}
+	-- Routine.wait(1)
+	-- littleDialogue.create{text = "<portrait belly>Welcome to my great show! Want to know what we're doing?<page>We must save Princess and world from EVIL GUY!<page>Oh, and we're not talking about Bowser and Peach!"}
+	-- Routine.wait(0.5)
+	-- littleDialogue.create{text = "<portrait belly 2>We meant YOU and ME."}
+	NPC.spawn(756, -159456, -160160)
 end
 
 function onStart()

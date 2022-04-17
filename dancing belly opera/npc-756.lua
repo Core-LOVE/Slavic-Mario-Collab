@@ -10,7 +10,7 @@ local maxHp = 12
 npcManager.setNpcSettings{
 	id = id,
 	
-	frames = 1,
+	frames = 5,
 	framestyle = 0,
 	framespeed = 8,
 	
@@ -50,35 +50,42 @@ phases.onAnimation = function(v)
 	
 	data.frameTimer = data.frameTimer + 1
 	
-	if data.frameTimer >= 8 then
-		data.frame = (data.frame + 1)
-		
-		if data.frame > 1 then
-			data.frame = 0
+	if not v.collidesBlockBottom then
+		if data.frame ~= 1 and data.frame ~= 2 then
+			data.frame = 1
 		end
 		
-		data.frameTimer = 0
+		if data.frameTimer >= 4 then
+			if data.frame == 1 then
+				data.frame = 2
+			else
+				data.frame = 1
+			end
+			
+			data.frameTimer = 0
+		end
+	else
+		data.frame = 0
+		
+		if data.phase == 1 then
+			data.frame = 3
+		end
+		
+		if v.speedX ~= 0 then
+			if data.frameTimer >= 4 and data.frameTimer < 8 then
+				data.frame = 4
+			elseif data.frameTimer >= 8 then
+				data.frameTimer = 0
+			else
+				data.frame = 0
+			end
+		end
 	end
-	
-	-- if not v.collidesBlockBottom then
-		-- if math.abs(v.speedX) >= 6 then
-			-- data.frame = 3
-		-- else
-			-- data.frame = 2
-		-- end
-	-- end
 
 	v.animationFrame = -1
 end
 
-local icon = Graphics.loadImageResolved 'bossIcon2.png'
-
-local buffer = Graphics.CaptureBuffer(800, 600)
-local isHot = false
-local hot = 0
-
-local fire = Shader()
-fire:compileFromFile(nil, Misc.resolveFile("firewall.frag"))
+local icon = Graphics.loadImageResolved 'bossIcon.png'
 
 phases.onCameraDraw = function(v)
 	local data = v.data
@@ -130,33 +137,6 @@ phases.onCameraDraw = function(v)
 		color = Color.white .. col,
 	}
 	
-	if isHot then
-		hot = hot + 0.5
-		if hot > 6 then
-			hot = 6
-		end
-	else
-		hot = hot - 0.5
-		if hot < 0 then
-			hot = 0
-		end
-	end
-	
-	if hot > 0 then
-		local p = 2
-		buffer:captureAt(p)
-		
-		Graphics.drawScreen{
-			priority = p,
-			texture = buffer,
-			shader = fire,
-			uniforms = {
-				time = lunatime.tick(),
-				intensity = hot,
-			},
-		}
-	end
-	
 	hud.showBossHP{
 		icon = icon,
 		amount = data.hp,
@@ -180,257 +160,83 @@ phases[1] = {}
 -- end
 
 phases[1].onTick = function(v)
-	local data = v.data
-	
-	v.ai1 = v.ai1 + 1
-	
-	if v.ai1 % 32 == 0 then
-		local boundary = Section(v.section).boundary
+	if v.collidesBlockBottom then
+		v.ai1 = v.ai1 + 1
+		Defines.earthquake = math.abs(v.speedX)
+		
+		local n = NPC.spawn(757, v.x, v.y + (v.height - 32))
+		n.speedY = -6
+		n.speedX = -(v.ai1 - 0.5)
+		
+		local n = NPC.spawn(757, v.x + (v.width - 32), v.y + (v.height - 32))
+		n.speedY = -6
+		n.speedX = v.ai1 - 0.5
+		
+		Effect.spawn(73, v.x + 16, v.y + (v.height - 32))
+		
+		-- v.speedX = v.speedX * 0.5
+		v.speedY = -12
+		
 		local p = player
-		
-		local x = (800 - v.ai1 * 3)
-		local n = NPC.spawn(757, boundary.right - x, boundary.top)
-		
-		local speed = 5
-		local distNormal = vector((v.x + v.width / 2) - (n.x + n.width / 2), (v.y + v.height / 2) - (n.y + n.height / 2)):normalize()
-		
-		n.speedX = distNormal.x * speed
-		n.speedY = distNormal.y * speed
+		v.speedX = -((v.x + v.width / 2) - (p.x + p.width / 2)) / 48
 	end
 end
 
 phases[1].condition = function(phase, v)
-	if v.ai1 > 128 then
+	if v.ai1 > 3 and v.collidesBlockBottom then
 		v.ai1 = 0
+		v.speedX = 0
+		v.speedY = 0
+		
 		return true
 	end
 end
 
--- local function movement2(t, dir)
-	-- return function(v)
-		-- v.speedY = 8
-		-- v.ai1 = v.ai1 + 1
-		-- if v.ai1 >= t then
-			-- v.speedX = 4 * dir
-			-- v.speedY = 0.5
-			-- return
-		-- end
-	-- end
--- end
+phases[2] = {}
 
--- phases[2] = {}
--- phases[2].onTick = function(v)
-	-- local data = v.data
-	-- v.speedX = 0
+phases[2].onTick = function(v)
+	v.ai1 = v.ai1 + 1
 	
-	-- v.ai1 = v.ai1 + 1
-	
-	-- if v.ai1 % 32 == 0 and v.ai1 >= 64 then
-		-- v.ai2 = v.ai2 + 8
+	if v.ai1 % 24 == 0 then
+		local bound = Section(v.section).boundary
+		v.ai2 = v.ai2 + 64
 		
-		-- data.frameTimer = 0
-		-- data.frame = 2
+		local x = (bound.left + (v.ai2 * 2)) - 80
 		
-		-- local n = NPC.spawn(754, v.x + 8, v.y + 32)
-		-- n.data.movement = movement2(v.ai2, (player.x + player.width / 2 > v.x + v.width / 2 and 1) or -1)
-	-- end
--- end
+		local n = NPC.spawn(755, x, bound.top)
+		n.y = n.y - 63
+		n.data.init = true
+		n.speedY = 8
+	end
+end
 
--- phases[2].condition = function(phase, v)
-	-- if v.ai1 > 160 then
-		-- v.ai1 = 0
-		-- v.ai2 = 0
+phases[2].condition = function(phase, v)
+	if v.ai1 > 24 * 10 then
+		v.ai2 = 0
+		v.ai1 = 0
 		
-		-- return true
-	-- end
--- end
+		local p = player
+		v.direction = ((p.x + p.width / 2 > v.x + v.width / 2) and 1) or -1
+		
+		return true
+	end
+end
 
--- phases[3] = {}
--- phases[3].onTick = function(v)
-	-- local data = v.data
-	
-	-- if player.x > v.x then
-		-- v.speedX = v.speedX + 0.1
-	-- elseif player.x < v.x then
-		-- v.speedX = v.speedX - 0.1
-	-- end
-	
-	-- v.ai1 = v.ai1 + 1
-	
-	-- if v.ai1 % 48 == 0 and v.ai1 >= 64 then
-		-- data.frameTimer = 0
-		-- data.frame = 2
-		
-		-- local n = NPC.spawn(755, v.x + 8, v.y + 32)
-		-- n.speedY = 6
-	-- end
-	
-	-- v.speedX = math.clamp(v.speedX, -6, 6)
--- end
--- phases[3].condition = function(phase, v)
-	-- if v.ai1 > 192 then
-		-- v.ai1 = 0
-		-- return true
-	-- end
--- end
+phases[3] = {}
 
--- phases[4] = {}
--- phases[4].onTick = function(v)
-	-- local data = v.data
+phases[3].onTick = function(v)
+	v.ai1 = v.ai1 + 1
 	
-	-- if player.x > v.x then
-		-- v.speedX = v.speedX + 0.1
-	-- elseif player.x < v.x then
-		-- v.speedX = v.speedX - 0.1
-	-- end
-	
-	-- v.ai1 = v.ai1 + 1
-	
-	-- if v.ai1 % 16 == 0 and v.ai1 >= 64 and v.ai1 <= 96 then
-		-- data.frameTimer = 0
-		-- data.frame = 2
-		
-		-- local n = NPC.spawn(754, v.x + 8, v.y + 32)
-		-- n.speedY = 6
-		-- n.data.movement = function(v)
-			-- v.ai1 = v.ai1 + 0.05
-			
-			-- v.speedX = math.cos(v.ai1) * 6
-		-- end
-	-- end
-	
-	-- v.speedX = math.clamp(v.speedX, -6, 6)
--- end
--- phases[4].condition = function(phase, v)
-	-- if v.ai1 > 128 then
-		-- v.ai1 = 0
-		-- return true
-	-- end
--- end
+	if v.ai1 > 32 then
+		v.speedX = 2 * v.direction
+	end
+end
 
--- phases[5] = {}
--- phases[5].onTick = function(v)
-	-- local data = v.data
-	
-	-- if player.x > v.x then
-		-- v.speedX = v.speedX + 0.1
-	-- elseif player.x < v.x then
-		-- v.speedX = v.speedX - 0.1
-	-- end
-	
-	-- v.ai1 = v.ai1 + 1
-	
-	-- if v.ai1 % 16 == 0 and v.ai1 >= 64 then
-		-- data.frameTimer = 0
-		-- data.frame = 2
+phases[3].condition = function(phase, v)
+	-- if v.ai2 > 400 then
 		
-		-- local n = NPC.spawn(755, v.x + 8, v.y + 32)
-		-- n.speedY = 4
 	-- end
-	
-	-- v.speedX = math.clamp(v.speedX, -6, 6)
--- end
--- phases[5].condition = function(phase, v)
-	-- if v.ai1 > 128 then
-		-- v.ai1 = 0
-		-- return true
-	-- end
--- end
-
--- phases[6] = {}
--- phases[6].onTick = function(v)
-	-- local data = v.data
-	
-	-- v.speedX = 0
-	-- v.ai1 = v.ai1 + 1
-	
-	-- if v.ai1 % 16 == 0 and v.ai1 >= 64 then
-		-- data.frameTimer = 0
-		-- data.frame = 2
-		
-		-- local n = NPC.spawn(755, v.x + 8, v.y + 32)
-		-- n.speedY = 4
-	-- end
--- end
--- phases[6].condition = function(phase, v)
-	-- if v.ai1 > 192 then
-		-- isHot = true
-		-- v.ai1 = 0
-		-- return true
-	-- end
--- end
-
--- phases[7] = {}
--- phases[7].onTick = function(v)
-	-- local data = v.data
-	
-	-- if player.x > v.x then
-		-- v.speedX = v.speedX + 0.1
-	-- elseif player.x < v.x then
-		-- v.speedX = v.speedX - 0.1
-	-- end
-	
-	-- v.ai1 = v.ai1 + 0.5
-	
-	-- if v.ai1 % 32 == 0 and v.ai1 >= 64 and v.ai1 < 160 then
-		-- data.frameTimer = 0
-		-- data.frame = 2
-		
-		-- local n = NPC.spawn(754, v.x + 8, v.y + 32)
-		-- n.data.movement = movement1(-12, 2)
-		
-		-- local n = NPC.spawn(754, v.x + 8, v.y + 32)
-		-- n.data.movement = movement1(-8, 2)
-		
-		-- local n = NPC.spawn(754, v.x + 8, v.y + 32)
-		-- n.data.movement = movement1(-4, 2)
-		
-		-- local n = NPC.spawn(754, v.x + 8, v.y + 32)
-		-- n.data.movement = movement1(4, 2)
-		
-		-- local n = NPC.spawn(754, v.x + 8, v.y + 32)
-		-- n.data.movement = movement1(8, 2)
-		
-		-- local n = NPC.spawn(754, v.x + 8, v.y + 32)
-		-- n.data.movement = movement1(12, 2)	
-	-- end
-	
-	-- v.speedX = math.clamp(v.speedX, -6, 6)
--- end
--- phases[7].condition = function(phase, v)
-	-- if v.ai1 > 192 then
-		-- isHot = false
-		-- v.ai1 = 0
-		-- return true
-	-- end
--- end
-
--- phases[3] = {}
--- phases[3].onTick = function(v)
-	-- if player.x > v.x then
-		-- v.speedX = v.speedX + 0.05
-	-- elseif player.x < v.x then
-		-- v.speedX = v.speedX - 0.05
-	-- end
-	
-	-- v.ai1 = v.ai1 + 1
-	
-	-- if v.ai1 % 48 == 0 then
-		-- local n = NPC.spawn(348, v.x + 16, v.y + 32)
-		-- n.speedX = -3
-		-- n.speedY = -1
-		-- NPC.spawn(348, v.x + 16, v.y + 32)
-		-- local n = NPC.spawn(348, v.x + 16, v.y + 32)
-		-- n.speedY = -1
-		-- n.speedX = 4
-	-- end
-	
-	-- v.speedX = math.clamp(v.speedX, -6, 6)
--- end
-
--- phases[3].condition = function(phase, v)
--- end
-
+end
 
 local function call(phase, name, ...)
 	if phase[name] then
@@ -489,7 +295,7 @@ function boss.onNPCHarm(e, v, r, o)
 		return
 	end
 	
-	SFX.play('bossHit.ogg')
+	-- SFX.play('bossHit.ogg')
 	Defines.earthquake = 6
 	
 	if data.hp > 0 then
@@ -575,7 +381,16 @@ function boss.onCameraDrawNPC(v)
 	call(phase, 'onCameraDraw', v)
 end
 
+function boss.onPlayerHarm(v)
+	local bound = Section(player.section).boundary
+	local x = bound.left + math.random(800 - 100)
+	
+	local e = Effect.spawn(753, x, bound.bottom - 64)
+	e.speedX = 0.001 * math.random(-1,1)
+end
+
 function boss.onInitAPI()
+	registerEvent(boss, 'onPlayerHarm')
 	registerEvent(boss, 'onNPCHarm')
 	npcManager.registerEvent(id, boss, 'onTickNPC')
 	npcManager.registerEvent(id, boss, 'onTickEndNPC')

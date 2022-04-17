@@ -6,6 +6,7 @@ _G.Details = require(path .. 'details')
 SaveData.language = SaveData.language or 'usa'
 
 require(path .. 'death')
+_G.LevelInfo = require(path .. "levelInfo")
 _G.HUDER = require(path .. "hud")
 local ld = require(path .. 'littleDialogue')
 
@@ -73,6 +74,7 @@ for k,v in ipairs(files) do
 end
 
 _G.cutscene = require(path .. "cutscene")
+_G.Actor = require(path .. "actor")
 
 _G.Pauser = require(path .. "pauser")
 

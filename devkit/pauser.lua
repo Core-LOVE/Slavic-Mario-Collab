@@ -114,6 +114,18 @@ end
 local icons = _G.Languages
 local check = Graphics.loadImageResolved 'devkit/check.png'
 
+local returnImg = Graphics.loadImageResolved 'devkit/return.png'
+
+local returnIcon = function(x, y)
+	Graphics.drawBox{
+		texture = returnImg,
+		
+		x = 34,
+		y = y - 6,
+		priority = 7,
+	}
+end
+		
 local settings = {
 	name = 'Settings',
 	cursor = 0,
@@ -127,6 +139,8 @@ local settings = {
 			options = parent
 			options.parent = nil
 		end,
+		
+		icon = returnIcon,
 	},
 	
 	{
@@ -236,8 +250,9 @@ local optimization = {
 			local parent = options.parent
 			
 			options = parent
-			options.parent = nil
 		end,
+		
+		icon = returnIcon,	
 	},
 	
 	{
@@ -325,6 +340,17 @@ local optimization = {
 	},
 }
 
+table.insert(settings, {
+	name = 'Optimizations',
+	
+	action = function()
+		local parent = settings
+		
+		options = optimization
+		options.parent = parent
+	end,
+})
+
 local assist = {
 	name = 'Assist Mode',
 	cursor = 0,
@@ -339,6 +365,8 @@ local assist = {
 			options = parent
 			options.parent = nil
 		end,
+		
+		icon = returnIcon,
 	},
 	
 	{
@@ -396,7 +424,11 @@ table.insert(options, {
 		Audio.MusicVolume(64)
 		Misc.unpause()
 	end,
+	
+	icon = returnIcon,
 })
+
+local restartImg = Graphics.loadImageResolved 'devkit/restart.png'
 
 if Level.filename() ~= 'worldmap.lvlx' then
 	table.insert(options, {
@@ -408,8 +440,20 @@ if Level.filename() ~= 'worldmap.lvlx' then
 			
 			Misc.unpause()
 		end,
+		
+		icon = function(x, y)
+			Graphics.drawBox{
+				texture = restartImg,
+				
+				x = 34,
+				y = y - 6,
+				priority = 7,
+			}
+		end,
 	})
 end
+
+local settingsImg = Graphics.loadImageResolved 'devkit/settings.png'
 
 table.insert(options, {
 	name = 'Settings',
@@ -420,16 +464,15 @@ table.insert(options, {
 		options = settings
 		options.parent = parent
 	end,
-})
-
-table.insert(options, {
-	name = 'Optimizations',
 	
-	action = function()
-		local parent = options
-		
-		options = optimization
-		options.parent = parent
+	icon = function(x, y)
+		Graphics.drawBox{
+			texture = settingsImg,
+			
+			x = 34,
+			y = y - 6,
+			priority = 7,
+		}
 	end,
 })
 
@@ -456,6 +499,8 @@ table.insert(options, {
 	end,
 })
 
+local exitImg = Graphics.loadImageResolved 'devkit/exit.png'
+
 table.insert(options, {
 	name = 'Exit',
 	
@@ -477,6 +522,16 @@ table.insert(options, {
 			
 			Level.load('worldmap.lvlx')
 		end
+	end,
+	
+	icon = function(x, y)
+		Graphics.drawBox{
+			texture = exitImg,
+			
+			x = 34,
+			y = y - 6,
+			priority = 7,
+		}
 	end,
 })
 

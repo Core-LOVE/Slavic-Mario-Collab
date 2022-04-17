@@ -1,3 +1,5 @@
+local spawnzones = require("local_spawnzones")
+
 local timer = -99
 local invert = 1
 

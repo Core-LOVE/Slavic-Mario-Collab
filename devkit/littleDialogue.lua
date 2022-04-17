@@ -217,13 +217,13 @@ do
             return folderPath
         end
 
-        -- local mainPath = "devkit/dialogue.ini"
+        -- local mainPath = "devkit/font.ini"
 		
         -- if Misc.resolveFile(mainPath) ~= nil then
             -- return mainPath
         -- end
 
-        -- return nil
+        return nil
     end
 
     local function compileShader(styleName,vertName,fragName)
@@ -304,7 +304,7 @@ do
 			if result then
 				settings.font = textplus.loadFont(result)
 			else
-				local font = textplus.loadFont('devkit/font.ini')
+				local font = textplus.loadFont("devkit/font.ini")
 				font.image = Graphics.loadImageResolved 'devkit/font/dialogue.png'
 				
 				settings.font = font

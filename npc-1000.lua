@@ -22,6 +22,9 @@ npcManager.setNpcSettings{
 	nohurt = true,
 	jumphurt = true,
 	
+	noiceball = true,
+	noyoshi = true,
+	
 	isinteractable = true,
 }
 
@@ -46,12 +49,17 @@ function npc.onTickEndNPC(v)
 	end
 end
 
+local function timer()
+	Routine.waitFrames(4)
+	mem(0x00B2C5A0, FIELD_WORD, 208)
+end
+
 function npc.onNPCKill(e, v, r)
 	if v.id ~= id then return end
 	
-	local p = npcManager.collected(v, r)
+	local p = npcManager.collected(v, r) or player
 	
-	if not p or p.forcedState ~= 0 then return end
+	if p.forcedState ~= 0 then return end
 	
 	for k in ipairs(Section.get()) do
 		Audio.MusicChange(k - 1, 0)
@@ -74,6 +82,9 @@ function npc.onNPCKill(e, v, r)
 	end
 	
 	Level.finish(winType, true)
+	
+	Routine.run(timer)
+
 	p.forcedState = 8
 	
 	if animation == -1 then

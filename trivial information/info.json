@@ -1,0 +1,26 @@
+{
+	"style" : "tree",
+	"title" : "Settings",
+	"layout": [
+		{
+			"control": "spinBox",
+			"type": "int",
+			"name": "rate",
+			"title": "Rate",
+			"value-default": 5,
+			"value-min": 1,
+			"value-max": 9999,
+			"single-step": 1
+		},
+		{
+			"control": "spinBox",
+			"type": "int",
+			"name": "direction",
+			"title": "Direction",
+			"value-default": -2,
+			"value-min": -2,
+			"value-max": 2,
+			"single-step": 1
+		}	
+	]
+}

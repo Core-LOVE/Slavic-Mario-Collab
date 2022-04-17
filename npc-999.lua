@@ -19,6 +19,9 @@ npcManager.setNpcSettings{
 	nohurt = true,
 	jumphurt = true,
 	
+	noiceball = true,
+	noyoshi = true,
+	
 	isinteractable = true,
 }
 
@@ -46,10 +49,8 @@ end
 function npc.onNPCKill(e, v, r)
 	if v.id ~= id then return end
 	
-	local p = npcManager.collected(v, r)
-	
-	if not p then return end
-	
+	local p = npcManager.collected(v, r) or player
+
 	SFX.play(59)
 
 	if not(SaveData[Level.filename()] and SaveData[Level.filename()].__clovers and SaveData[Level.filename()].__clovers[v.idx]) then

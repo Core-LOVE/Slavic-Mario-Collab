@@ -1,0 +1,7 @@
+[1]
+lifetime=80
+onTick=TICK_SLOWDOWN
+speedY=-2
+xOffset=0
+yOffset=0
+priority=3
