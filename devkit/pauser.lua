@@ -351,69 +351,6 @@ table.insert(settings, {
 	end,
 })
 
-local assist = {
-	name = 'Assist Mode',
-	cursor = 0,
-	desc = "<color red>Warning</color>: Using any of these settings will enable <color lightblue>Assist Mode</color> on\nthis save <color red>PERMANENTLY</color>!",
-	
-	{
-		name = 'Return',
-		
-		action = function()
-			local parent = options.parent
-			
-			options = parent
-			options.parent = nil
-		end,
-		
-		icon = returnIcon,
-	},
-	
-	{
-		name = 'No Pit Deaths',
-		
-		action = function()
-			local parent = options.parent
-			
-			options = parent
-			options.parent = nil
-		end,
-	},
-	
-	{
-		name = 'Game Speed',
-		
-		action = function()
-			local parent = options.parent
-			
-			options = parent
-			options.parent = nil
-		end,
-	},
-	
-	{
-		name = 'Invincibility',
-		
-		action = function()
-			local parent = options.parent
-			
-			options = parent
-			options.parent = nil
-		end,
-	},
-	
-	{
-		name = 'Double Jumps',
-		
-		action = function()
-			local parent = options.parent
-			
-			options = parent
-			options.parent = nil
-		end,
-	},
-}
-
 options.cursor = 0
 options.name = "Menu"
 
@@ -437,8 +374,8 @@ if Level.filename() ~= 'worldmap.lvlx' then
 		action = function()
 			Level.load(Level.filename())
 			Audio.MusicVolume(64)
-			
 			Misc.unpause()
+			player:mem(0x11E,FIELD_BOOL,false)		
 		end,
 		
 		icon = function(x, y)
@@ -468,29 +405,6 @@ table.insert(options, {
 	icon = function(x, y)
 		Graphics.drawBox{
 			texture = settingsImg,
-			
-			x = 34,
-			y = y - 6,
-			priority = 7,
-		}
-	end,
-})
-
-local assistImg = Graphics.loadImageResolved 'devkit/assist.png'
-
-table.insert(options, {
-	name = 'Assist Mode',
-	
-	action = function()
-		local parent = options
-		
-		options = assist
-		options.parent = parent
-	end,
-	
-	icon = function(x, y)
-		Graphics.drawBox{
-			texture = assistImg,
 			
 			x = 34,
 			y = y - 6,
@@ -587,6 +501,7 @@ function pause.onInputUpdate()
 		if (rk.pause == KEYS_PRESSED) then
 			Audio.MusicVolume(64)
 			Misc.unpause()
+			player:mem(0x11E,FIELD_BOOL,false)
 			return
 		end
 		
@@ -612,6 +527,7 @@ function pause.onInputUpdate()
 				option.action()
 			end
 			
+			player:mem(0x11E,FIELD_BOOL,false)
 			player.keys.jump = false
 		end
 	end
